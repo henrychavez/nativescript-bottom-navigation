@@ -1,0 +1,20 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:bottomBar="nativescript-bottom-navigation"
+      loaded="pageLoaded"
+      class="page">
+    <GridLayout columns="*"
+                rows="*, auto">
+        <StackLayout class="p-20"
+                     row="0">
+            <Label text="bottom-navigation s" class="t-20 text-center c-black" textWrap="true" />
+            <Label text="test" class="t-20 text-center c-black" textWrap="true" />
+        </StackLayout>
+        <bottomBar:BottomNavigation class="bottom-nav"
+                                    loaded="loaded"
+                                    row="1">
+            <bottomBar:BottomNavigationTab title="First" icon="ic_home"></bottomBar:BottomNavigationTab>
+            <bottomBar:BottomNavigationTab title="Second" icon="ic_view_list"></bottomBar:BottomNavigationTab>
+            <bottomBar:BottomNavigationTab title="Third" icon="ic_menu"></bottomBar:BottomNavigationTab>
+        </bottomBar:BottomNavigation>
+    </GridLayout>
+</Page>
