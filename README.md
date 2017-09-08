@@ -149,7 +149,7 @@ As the examples in the Javascript/Typescript version you can use the `tabs` prop
                       activeColor="red"
                       inactiveColor="yellow"
                       backgroundColor="black"
-                      (tabSelected)="onBottomNavigationTabSelected"
+                      (tabSelected)="onBottomNavigationTabSelected($event)"
                       row="1"></BottomNavigation>
 </GridLayout>
 ```
@@ -164,7 +164,7 @@ or you can declare the BottomNavigationTabs in your html directly
     <BottomNavigation activeColor="red"
                       inactiveColor="yellow"
                       backgroundColor="black"
-                      (tabSelected)="onBottomNavigationTabSelected"
+                      (tabSelected)="onBottomNavigationTabSelected($event)"
                       row="1">
         <BottomNavigationTab title="First" icon="ic_home"></BottomNavigationTab>
         <BottomNavigationTab title="Second" icon="ic_view_list"></BottomNavigationTab>
