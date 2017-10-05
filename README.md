@@ -38,7 +38,7 @@ You can set the tabs using the `tabs` property
                                     inactiveColor="red"
                                     backgroundColor="black"
                                     loaded="bottomNavigationLoaded"
-                                    row="1"></bottomBar:BottomNavigation>
+                                    row="1"></bottomNav:BottomNavigation>
     </GridLayout>
 </Page>
 ```
@@ -95,7 +95,7 @@ or you can add the tabs directly in your xml view
             <bottomNav:BottomNavigationTab title="First" icon="ic_home"></bottomNav:BottomNavigationTab>
             <bottomNav:BottomNavigationTab title="Second" icon="ic_view_list"></bottomNav:BottomNavigationTab>
             <bottomNav:BottomNavigationTab title="Third" icon="ic_menu"></bottomNav:BottomNavigationTab>
-        </bottomBar:BottomNavigation>
+        </bottomNav:BottomNavigation>
     </GridLayout>
 </Page>
 ```
