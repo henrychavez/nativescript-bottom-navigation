@@ -73,7 +73,8 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
 
 export const tabsProperty = new Property<BottomNavigationBase, BottomNavigationTabBase[]>(
   {
-    name: 'tabs'
+    name: 'tabs',
+    equalityComparer: (a: any[], b: any[]) => !a && !b && a.length === b.length
   }
 );
 

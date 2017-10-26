@@ -38,8 +38,8 @@ export class BottomNavigation extends BottomNavigationBase {
   private _delegate: BottomNavigationDelegate;
 
   createNativeView(): Object {
-    this.nativeView = new MiniTabBar({ items: null });
     this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
+    this.nativeView = new MiniTabBar({ items: null });
     this.nativeView.frame = CGRectMake(0, screen.mainScreen.heightDIPs - 56, screen.mainScreen.widthDIPs, 56);
 
     return this.nativeView;
@@ -59,11 +59,6 @@ export class BottomNavigation extends BottomNavigationBase {
   public onLoaded() {
     this.nativeView.delegate = this._delegate;
     super.onLoaded();
-  }
-
-  public onUnloaded() {
-    this.nativeView.delegate = null;
-    super.onUnloaded();
   }
 
   get ios(): any {
@@ -124,7 +119,7 @@ export class BottomNavigation extends BottomNavigationBase {
   }
 
   protected selectTabNative(index: number): void {
-    this.nativeView.selectItem(index, true);
+    this.nativeView.selectItemAnimated(index, true);
   }
 
 }

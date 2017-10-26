@@ -57,11 +57,6 @@ export class BottomNavigation extends BottomNavigationBase {
     this.nativeView.setDefaultBackgroundColor(new Color(this.backgroundColor).android);
   }
 
-  public onUnloaded() {
-    this.nativeView = null;
-    super.onUnloaded();
-  }
-
   get android(): any {
     return this.nativeView;
   }

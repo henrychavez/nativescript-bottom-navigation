@@ -36,9 +36,9 @@ class names available for styling your app at https://docs.nativescript.org/ui/t
       </ng-template>
     </ListView>
   </StackLayout>
-  <BottomNavigation row="1"
+  <BottomNavigation id="bottomNavigation"
+                    row="1"
                     activeColor="black"
-                    (loaded)="onBottomNavigationLoaded($event)"
                     (tabSelected)="onBottomNavigationTabSelected($event)">
     <BottomNavigationTab title="First" icon="ic_home"></BottomNavigationTab>
     <BottomNavigationTab title="Second" icon="ic_view_list"></BottomNavigationTab>
