@@ -16,7 +16,7 @@ export class ItemsComponent implements OnInit {
   public items: Item[];
   public tabs: BottomNavigationTab[] = [
     new BottomNavigationTab('First', 'ic_home'),
-    new BottomNavigationTab('Second', 'ic_view_list'),
+    new BottomNavigationTab('Second', 'ic_view_list', false),
     new BottomNavigationTab('Third', 'ic_menu')
   ];
 

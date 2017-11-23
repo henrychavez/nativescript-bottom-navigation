@@ -3,6 +3,7 @@ import { CssProperty, Property } from 'tns-core-modules/ui/core/properties';
 import { EventData } from 'tns-core-modules/data/observable';
 import { Style } from 'tns-core-modules/ui/styling/style';
 import { Color } from 'tns-core-modules/color';
+import { booleanConverter } from 'tns-core-modules/ui/core/view-base';
 
 /**
  * Event interface for tab selected event
@@ -59,7 +60,18 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
     }
   }
 
-  protected abstract selectTabNative(index: number): void;
+  public onTabSelected(index: number): boolean {
+    let eventData: OnTabSelectedEventData = {
+      eventName: 'tabSelected',
+      object: this,
+      oldIndex: this.selectedTabIndex || 0,
+      newIndex: index
+    };
+    if (this.tabs[index].selectable) { this.selectedTabIndex = index; }
+    this.notify(eventData);
+
+    return this.tabs[index].selectable;
+  }
 
   _addChildFromBuilder(name: string, value: any): void {
     if (name === 'BottomNavigationTab') {
@@ -69,6 +81,8 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
       this.tabs.push(<BottomNavigationTabBase>value);
     }
   }
+
+  protected abstract selectTabNative(index: number): void;
 }
 
 export const tabsProperty = new Property<BottomNavigationBase, BottomNavigationTabBase[]>(
@@ -135,15 +149,14 @@ backgroundColorCssProperty.register(Style);
 
 export class BottomNavigationTabBase {
 
-  private _title: string;
-  private _icon: string;
-  private _parent?: WeakRef<BottomNavigationBase>;
-
-  constructor(title: string, icon: string, parent?: WeakRef<BottomNavigationBase>) {
+  constructor(title: string, icon: string, selectable?: boolean, parent?: WeakRef<BottomNavigationBase>) {
     this._title = title;
     this._icon = icon;
+    if (selectable) { this._selectable = selectable; }
     if (parent) { this._parent = parent; }
   }
+
+  private _title: string;
 
   get title(): string {
     return this._title;
@@ -155,6 +168,8 @@ export class BottomNavigationTabBase {
     }
   }
 
+  private _icon: string;
+
   get icon(): string {
     return this._icon;
   }
@@ -164,6 +179,18 @@ export class BottomNavigationTabBase {
       this._icon = value;
     }
   }
+
+  private _selectable: boolean = true;
+
+  get selectable(): boolean {
+    return booleanConverter(<any>this._selectable);
+  }
+
+  set selectable(value: boolean) {
+    this._selectable = value;
+  }
+
+  private _parent?: WeakRef<BottomNavigationBase>;
 
   get parent(): WeakRef<BottomNavigationBase> {
     return this._parent;

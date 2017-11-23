@@ -1,12 +1,12 @@
 import {
   activeColorCssProperty,
-  activeColorProperty, backgroundColorCssProperty,
+  activeColorProperty,
+  backgroundColorCssProperty,
   backgroundColorProperty,
   BottomNavigationBase,
   BottomNavigationTabBase,
   inactiveColorCssProperty,
   inactiveColorProperty,
-  OnTabSelectedEventData,
   tabsProperty
 } from './bottom-navigation.common';
 import { Color } from 'tns-core-modules/color';
@@ -37,6 +37,10 @@ export class BottomNavigation extends BottomNavigationBase {
 
   private _delegate: BottomNavigationDelegate;
 
+  get ios(): any {
+    return this.nativeView;
+  }
+
   createNativeView(): Object {
     this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
     this.nativeView = new MiniTabBar({ items: null });
@@ -52,17 +56,25 @@ export class BottomNavigation extends BottomNavigationBase {
     this.nativeView.backgroundBlurEnabled = false;
   }
 
-  public disposeNativeView() {
+  disposeNativeView() {
     this._delegate = null;
   }
 
-  public onLoaded() {
+  onLoaded() {
     this.nativeView.delegate = this._delegate;
     super.onLoaded();
   }
 
-  get ios(): any {
-    return this.nativeView;
+  createTabs(tabs: BottomNavigationTab[]) {
+    if (!this.tabs) { this.tabs = tabs; }
+    let bottomNavigationTabs = <BottomNavigationTab[]>[];
+    for (let tab of tabs) {
+      tab.parent = new WeakRef(this);
+      let miniTabBarItem = new MiniTabBarItem({ title: tab.title, icon: fromResource(tab.icon).ios });
+      miniTabBarItem.selectable = tab.selectable;
+      bottomNavigationTabs.push(miniTabBarItem);
+    }
+    this.nativeView.setTabs(bottomNavigationTabs);
   }
 
   [tabsProperty.getDefault](): BottomNavigationTab[] {
@@ -71,16 +83,6 @@ export class BottomNavigation extends BottomNavigationBase {
 
   [tabsProperty.setNative](value: BottomNavigationTab[]) {
     this.createTabs(value);
-  }
-
-  public createTabs(tabs: BottomNavigationTab[]) {
-    let bottomNavigationTabs = <BottomNavigationTab[]>[];
-    for (let tab of tabs) {
-      tab.parent = new WeakRef(this);
-      let miniTabBarItem = new MiniTabBarItem({ title: tab.title, icon: fromResource(tab.icon).ios });
-      bottomNavigationTabs.push(miniTabBarItem);
-    }
-    this.nativeView.setTabs(bottomNavigationTabs);
   }
 
   [activeColorProperty.setNative](activeColor: string) {
@@ -107,17 +109,6 @@ export class BottomNavigation extends BottomNavigationBase {
     this.nativeView.backgroundColor = backgroundColor.ios;
   }
 
-  public onTabSelected(index: number) {
-    let eventData: OnTabSelectedEventData = {
-      eventName: 'tabSelected',
-      object: this,
-      oldIndex: this.selectedTabIndex,
-      newIndex: index
-    };
-    this.selectedTabIndex = index;
-    this.notify(eventData);
-  }
-
   protected selectTabNative(index: number): void {
     this.nativeView.selectItemAnimated(index, true);
   }
@@ -126,7 +117,7 @@ export class BottomNavigation extends BottomNavigationBase {
 
 export class BottomNavigationTab extends BottomNavigationTabBase {
 
-  constructor(title: string, icon: string, parent?: WeakRef<BottomNavigationBase>) {
-    super(title, icon, parent);
+  constructor(title: string, icon: string, selectable?: boolean, parent?: WeakRef<BottomNavigationBase>) {
+    super(title, icon, selectable, parent);
   }
 }

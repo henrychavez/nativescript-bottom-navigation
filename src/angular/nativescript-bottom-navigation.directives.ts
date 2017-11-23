@@ -124,6 +124,17 @@ export class BottomNavigationTabDirective {
   set icon(value: string) {
     this._icon = value;
   }
+
+  @Input()
+  private _selectable: boolean;
+
+  get selectable(): boolean {
+    return this._selectable;
+  }
+
+  set selectable(value: boolean) {
+    this._selectable = value;
+  }
 }
 
 export const DIRECTIVES = [BottomNavigationDirective, BottomNavigationTabDirective];

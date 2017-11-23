@@ -250,3 +250,4 @@ You can also use your css file to set or change the activeColor, inactiveColor &
 | --- | --- | --- | --- | --- |
 | title | true | null | `String` | Title of the tab |
 | icon | true | null | `String` | Icon of the tab  |
+| selectable | false | true | `Boolean` | Determine if the tab can be selected or not (The `tabSelected` event still be fired)  |
