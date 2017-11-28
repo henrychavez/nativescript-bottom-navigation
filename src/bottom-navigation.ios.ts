@@ -13,7 +13,7 @@ import { Color } from 'tns-core-modules/color';
 import { fromResource } from 'tns-core-modules/image-source';
 import { screen } from 'tns-core-modules/platform';
 
-declare const MiniTabBarItem, MiniTabBar, MiniTabBarDelegate;
+declare const MiniTabBarItem, MiniTabBar, MiniTabBarDelegate: any;
 
 export class BottomNavigationDelegate extends NSObject {
 

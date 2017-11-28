@@ -1,14 +1,14 @@
-import { BottomNavigationBase, BottomNavigationTabBase } from './bottom-navigation.common';
 import { EventData } from 'tns-core-modules/data/observable';
+import { AddChildFromBuilder, View } from 'tns-core-modules/ui/core/view';
 
 export declare interface OnTabSelectedEventData extends EventData {
   oldIndex: number;
   newIndex: number;
 }
 
-export declare class BottomNavigation extends BottomNavigationBase {
+export declare abstract class BottomNavigationBase extends View implements AddChildFromBuilder {
 
-  public tabs: BottomNavigationTab[];
+  public tabs: BottomNavigationTabBase[];
 
   public selectedTabIndex: number;
 
@@ -18,6 +18,28 @@ export declare class BottomNavigation extends BottomNavigationBase {
 
   public backgroundColor: string;
 
+  public selectTab(index: number): void;
+
+  _addChildFromBuilder(name: string, value: any): void;
+
+  protected abstract selectTabNative(index: number): void;
+}
+
+export declare class BottomNavigationTabBase {
+
+  public title: string;
+
+  public icon: string;
+
+  public selectable: boolean;
+
+  parent: WeakRef<BottomNavigationBase>;
+
+  constructor(title: string, icon: string, selectable?: boolean, parent?: WeakRef<BottomNavigationBase>);
+}
+
+export declare class BottomNavigation extends BottomNavigationBase {
+
   readonly ios: any;
 
   private _delegate;
@@ -25,8 +47,6 @@ export declare class BottomNavigation extends BottomNavigationBase {
   constructor();
 
   public createTabs(tabs: BottomNavigationTab[]): void;
-
-  public selectTab(index: number): void;
 
   protected selectTabNative(index: number): void;
 }

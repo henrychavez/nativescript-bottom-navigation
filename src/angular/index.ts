@@ -1,1 +1,1 @@
-export * from "./nativescript-bottom-navigation.module";
+export * from './nativescript-bottom-navigation.module';
