@@ -75,6 +75,7 @@ export class BottomNavigation extends BottomNavigationBase {
       bottomNavigationTabs.push(miniTabBarItem);
     }
     this.nativeView.setTabs(bottomNavigationTabs);
+    this.nativeView.selectItemAnimated(this.selectedTabIndex, true);
   }
 
   [tabsProperty.getDefault](): BottomNavigationTab[] {
