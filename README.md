@@ -5,7 +5,7 @@ Nativescript plugin for Android & iOS to have the Bottom Navigation bar.
 [![npm](https://img.shields.io/npm/v/nativescript-bottom-navigation.svg)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![npm](https://img.shields.io/npm/dt/nativescript-bottom-navigation.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-bottom-navigation)
 
 
-![iOS](screenshots/screenshot-ios.png)
+<img alt="iOS" src="screenshots/screenshot-ios.png" width="250">
 
 ## Prerequisites / Requirements
 
