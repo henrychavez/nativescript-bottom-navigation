@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Item } from "./item";
 import { ItemService } from "./item.service";
 import { BottomNavigation, BottomNavigationTab, OnTabSelectedEventData } from 'nativescript-bottom-navigation';
-import { Page } from 'tns-core-modules/ui/page';
+import { Page, isIOS } from 'tns-core-modules/ui/page';
+import { Color } from "tns-core-modules/color/color";
 
 @Component(
   {

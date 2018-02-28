@@ -5,6 +5,8 @@ Nativescript plugin for Android & iOS to have the Bottom Navigation bar.
 [![npm](https://img.shields.io/npm/v/nativescript-bottom-navigation.svg)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![npm](https://img.shields.io/npm/dt/nativescript-bottom-navigation.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-bottom-navigation)
 
 
+![iOS](screenshots/screenshot-ios.png)
+
 ## Prerequisites / Requirements
 
 You need the version of NS3 to use this plugin.
@@ -37,6 +39,7 @@ You can set the tabs using the `tabs` property
                                     activeColor="green"
                                     inactiveColor="red"
                                     backgroundColor="black"
+                                    keyLineColor="black"
                                     loaded="bottomNavigationLoaded"
                                     row="1"></bottomNav:BottomNavigation>
     </GridLayout>
@@ -90,6 +93,7 @@ or you can add the tabs directly in your xml view
         <bottomNav:BottomNavigation activeColor="green"
                                     inactiveColor="red"
                                     backgroundColor="black"
+                                    keyLineColor="black"
                                     loaded="bottomNavigationLoaded"
                                     row="1">
             <bottomNav:BottomNavigationTab title="First" icon="ic_home"></bottomNav:BottomNavigationTab>
@@ -149,6 +153,7 @@ As the examples in the Javascript/Typescript version you can use the `tabs` prop
                       activeColor="red"
                       inactiveColor="yellow"
                       backgroundColor="black"
+                      keyLineColor="black"
                       (tabSelected)="onBottomNavigationTabSelected($event)"
                       row="1"></BottomNavigation>
 </GridLayout>
@@ -164,6 +169,7 @@ or you can declare the BottomNavigationTabs in your html directly
     <BottomNavigation activeColor="red"
                       inactiveColor="yellow"
                       backgroundColor="black"
+                      keyLineColor="black"
                       (tabSelected)="onBottomNavigationTabSelected($event)"
                       row="1">
         <BottomNavigationTab title="First" icon="ic_home"></BottomNavigationTab>
@@ -207,6 +213,7 @@ You can also use your css file to set or change the activeColor, inactiveColor &
     tab-active-color: green;
     tab-inactive-color: black;
     tab-background-color: blue;
+    tab-keyline-color: blue;
 }
 ```
 
@@ -228,6 +235,7 @@ You can also use your css file to set or change the activeColor, inactiveColor &
 | activeColor | false | "blue" | `String` | Color of the BottomNavigationTab when it's selected  |
 | inactiveColor | false | "gray" | `String` | Color of the BottomNavigationTab when it's not selected  |
 | backgroundColor | false | "white" | `String` | Color of the BottomNavigation background  |
+| keyLineColor | false | "#eeeeee" | `String` | Color of the BottomNavigation keyLine (Top border)  |
 
 #### Properties (internal)
 

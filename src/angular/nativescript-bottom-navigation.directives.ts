@@ -58,6 +58,20 @@ export class BottomNavigationDirective implements AfterViewInit {
     }
   }
 
+  private _keyLineColor: string;
+
+  @Input()
+  get keyLineColor(): string {
+    return this._keyLineColor;
+  }
+
+  set keyLineColor(value: string) {
+    this._keyLineColor = value;
+    if (this._viewInitialized) {
+      this.bottomNavigation.keyLineColor = this._keyLineColor;
+    }
+  }
+
   private _tabs: BottomNavigationTab[];
 
   @Input()
@@ -91,6 +105,7 @@ export class BottomNavigationDirective implements AfterViewInit {
     if (!isBlank(this._activeColor)) { this.bottomNavigation.activeColor = this._activeColor; }
     if (!isBlank(this._inactiveColor)) { this.bottomNavigation.inactiveColor = this._inactiveColor; }
     if (!isBlank(this._backgroundColor)) { this.bottomNavigation.backgroundColor = this._backgroundColor; }
+    if (!isBlank(this._keyLineColor)) { this.bottomNavigation.keyLineColor = this._keyLineColor; }
     if (!isBlank(this._tabs)) { this.bottomNavigation.tabs = this._tabs; }
     if (!isBlank(this._selectedTabIndex)) { this.bottomNavigation.selectedTabIndex = this._selectedTabIndex; }
   }

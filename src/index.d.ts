@@ -17,6 +17,8 @@ export declare abstract class BottomNavigationBase extends View implements AddCh
   public inactiveColor: string;
 
   public backgroundColor: string;
+  
+  public keyLineColor: string;
 
   public selectTab(index: number): void;
 

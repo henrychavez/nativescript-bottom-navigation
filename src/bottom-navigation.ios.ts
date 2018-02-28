@@ -7,11 +7,14 @@ import {
   BottomNavigationTabBase,
   inactiveColorCssProperty,
   inactiveColorProperty,
-  tabsProperty
+  tabsProperty,
+  keyLineColorProperty,
+  keyLineColorCssProperty
 } from './bottom-navigation.common';
 import { Color } from 'tns-core-modules/color';
 import { fromResource } from 'tns-core-modules/image-source';
 import { screen } from 'tns-core-modules/platform';
+import { ios } from 'tns-core-modules/application';
 
 declare const MiniTabBarItem, MiniTabBar, MiniTabBarDelegate: any;
 
@@ -21,7 +24,7 @@ export class BottomNavigationDelegate extends NSObject {
   private _owner: WeakRef<BottomNavigation>;
 
   public static initWithOwner(owner: WeakRef<BottomNavigation>): BottomNavigationDelegate {
-    let delegate = <BottomNavigationDelegate> BottomNavigationDelegate.new() as BottomNavigationDelegate;
+    let delegate = <BottomNavigationDelegate>BottomNavigationDelegate.new() as BottomNavigationDelegate;
     delegate._owner = owner;
 
     return delegate;
@@ -44,7 +47,9 @@ export class BottomNavigation extends BottomNavigationBase {
   createNativeView(): Object {
     this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
     this.nativeView = new MiniTabBar({ items: null });
-    this.nativeView.frame = CGRectMake(0, screen.mainScreen.heightDIPs - 56, screen.mainScreen.widthDIPs, 56);
+    const bottomSafeArea = ios.window.safeAreaInsets.bottom;
+    const bottomBarHeight = 56 + bottomSafeArea;
+    this.nativeView.frame = CGRectMake(0, screen.mainScreen.heightDIPs - bottomBarHeight, screen.mainScreen.widthDIPs, bottomBarHeight);
 
     return this.nativeView;
   }
@@ -53,6 +58,7 @@ export class BottomNavigation extends BottomNavigationBase {
     this.nativeView.tintColor = new Color(this.activeColor).ios;
     this.nativeView.inactiveColor = new Color(this.inactiveColor).ios;
     this.nativeView.backgroundColor = new Color(this.backgroundColor).ios;
+    this.nativeView.keyLine.backgroundColor = new Color(this.keyLineColor).ios;
     this.nativeView.backgroundBlurEnabled = false;
   }
 
@@ -108,6 +114,15 @@ export class BottomNavigation extends BottomNavigationBase {
 
   [backgroundColorCssProperty.setNative](backgroundColor: Color) {
     this.nativeView.backgroundColor = backgroundColor.ios;
+  }
+
+  [keyLineColorProperty.setNative](keyLineColor: string) {
+    console.log('seas', keyLineColor);
+    this.nativeView.keyLine.backgroundColor = new Color(keyLineColor).ios;
+  }
+
+  [keyLineColorCssProperty.setNative](keyLineColor: Color) {
+    this.nativeView.keyLine.backgroundColor = keyLineColor.ios;
   }
 
   protected selectTabNative(index: number): void {

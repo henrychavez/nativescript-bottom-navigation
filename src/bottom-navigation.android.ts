@@ -8,6 +8,8 @@ import {
   inactiveColorCssProperty,
   inactiveColorProperty,
   tabsProperty,
+  keyLineColorProperty,
+  keyLineColorCssProperty,
 } from './bottom-navigation.common';
 import { Color } from 'tns-core-modules/color';
 import { fromResource } from 'tns-core-modules/image-source';
@@ -94,6 +96,14 @@ export class BottomNavigation extends BottomNavigationBase {
 
   [backgroundColorCssProperty.setNative](backgroundColor: Color) {
     this.nativeView.setDefaultBackgroundColor(backgroundColor.android);
+  }
+
+  [keyLineColorProperty.setNative](keyLineColor: string) {
+    // This inly works with ios
+  }
+
+  [keyLineColorCssProperty.setNative](keyLineColor: Color) {
+    // This inly works with ios
   }
 
   protected selectTabNative(index: number): void {

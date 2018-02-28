@@ -43,11 +43,18 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
   public inactiveColor: string = 'gray';
 
   /**
-   * Get or set the backgroundColor of the bottomBar
+   * Get or set the backgroundColor of the bottomNavigation
    *
    * @type {string}
    */
   public backgroundColor: string = 'white';
+
+  /**
+   * Get or set the keyLineColor of the bottomNavigation only for iOS
+   *
+   * @type {string}
+   */
+  public keyLineColor: string = '#eeeeee';
 
   /**
    * Method allowing to manually select a tab
@@ -139,13 +146,32 @@ backgroundColorProperty.register(BottomNavigationBase);
 
 export const backgroundColorCssProperty = new CssProperty<Style, Color>(
   {
-    name: "tabBackgroundColor",
-    cssName: "tab-background-color",
+    name: 'tabBackgroundColor',
+    cssName: 'tab-background-color',
     equalityComparer: Color.equals,
-    valueConverter: (v) => new Color(v)
+    valueConverter: v => new Color(v)
   }
 );
 backgroundColorCssProperty.register(Style);
+
+export const keyLineColorProperty = new Property<BottomNavigationBase, string>(
+  {
+    name: 'keyLineColor'
+  }
+);
+
+keyLineColorProperty.register(BottomNavigationBase);
+
+export const keyLineColorCssProperty = new CssProperty<Style, Color>(
+  {
+    name: 'tabKeyLineColor',
+    cssName: 'tab-keyline-color',
+    equalityComparer: Color.equals,
+    valueConverter: v => new Color(v)
+  }
+);
+
+keyLineColorCssProperty.register(Style);
 
 export class BottomNavigationTabBase {
 
