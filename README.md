@@ -181,7 +181,7 @@ or you can declare the BottomNavigationTabs in your html directly
 
 ```javascript
 import { Component, OnInit } from "@angular/core";
-import { BottomNavigation, BottonNavigationTab, OnTabSelectedEventData } from 'nativescript-bottom-navigation';
+import { BottomNavigation, BottomNavigationTab, OnTabSelectedEventData } from 'nativescript-bottom-navigation';
 
 @Component(
   {
@@ -192,7 +192,7 @@ import { BottomNavigation, BottonNavigationTab, OnTabSelectedEventData } from 'n
 )
 export class AppComponent {
 
-  public tabs: BottonNavigationTab[] = [
+  public tabs: BottomNavigationTab[] = [
     new BottomNavigationTab('First', 'ic_home'),
     new BottomNavigationTab('Second', 'ic_view_list'),
     new BottomNavigationTab('Third', 'ic_menu')
