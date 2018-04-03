@@ -1,7 +1,5 @@
 use_frameworks!
 
-platform :ios, '8.0'
-
 pod 'MiniTabBar', :git => 'https://github.com/henrychavez/MiniTabBar.git'
 
 post_install do |installer|
