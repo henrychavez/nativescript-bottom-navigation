@@ -47,7 +47,10 @@ export class BottomNavigation extends BottomNavigationBase {
   createNativeView(): Object {
     this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
     this.nativeView = new MiniTabBar({ items: null });
-    const bottomSafeArea = ios.window.safeAreaInsets.bottom;
+    let bottomSafeArea = 0;
+    if ( ios.window.safeAreaInsets ) {
+      bottomSafeArea = ios.window.safeAreaInsets.bottom;
+    }
     const bottomBarHeight = 56 + bottomSafeArea;
     this.nativeView.frame = CGRectMake(0, screen.mainScreen.heightDIPs - bottomBarHeight, screen.mainScreen.widthDIPs, bottomBarHeight);
 
