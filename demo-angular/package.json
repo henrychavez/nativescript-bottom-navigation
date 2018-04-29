@@ -26,7 +26,7 @@
     "@angular/platform-browser-dynamic": "~5.2.0",
     "@angular/router": "~5.2.0",
     "nativescript-angular": "~5.2.0",
-    "nativescript-bottom-navigation": "file:../publish/package/nativescript-bottom-navigation-1.3.0.tgz",
+    "nativescript-bottom-navigation": "file:../src",
     "nativescript-theme-core": "~1.0.4",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~5.5.2",
