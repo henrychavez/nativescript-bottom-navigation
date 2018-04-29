@@ -1,5 +1,3 @@
-﻿@import 'nativescript-theme-core/css/core.light.css';
+@import "~/nativescript-theme-core/css/core.light.css";
 
-.bottom-nav {
-  tab-active-color: green;
-}
+/* Your CSS goes here */

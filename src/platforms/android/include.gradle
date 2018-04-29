@@ -1,11 +1,7 @@
 /* Include.gradle configuration: http://docs.nativescript.org/plugins/plugins#includegradle-specification */
 
 android {
-	productFlavors {
-		"nativescript-bottom-navigation" {
-			dimension "nativescript-bottom-navigation"
-		}
-	}
+	
 }
 
 dependencies {
