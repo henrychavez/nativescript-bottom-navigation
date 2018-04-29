@@ -56,28 +56,18 @@
     "homepage": "https://github.com/henrychavez/nativescript-bottom-navigation",
     "repository": "https://github.com/henrychavez/nativescript-bottom-navigation",
     "readmeFilename": "README.md",
-    "peerDependencies": {
-        "tns-core-modules": "^4.0.0"
-    },
     "devDependencies": {
-        "@angular/common": "^5.2.10",
-        "@angular/compiler": "^5.2.10",
-        "@angular/core": "^5.2.10",
-        "@angular/forms": "^5.2.10",
-        "@angular/http": "^5.2.10",
-        "@angular/platform-browser": "^5.2.10",
-        "@angular/platform-browser-dynamic": "^5.2.0",
-        "@angular/router": "^5.2.5",
-        "nativescript-angular": "^5.3.0",
-        "prompt": "^1.0.0",
-        "rimraf": "^2.5.0",
-        "rxjs": "^5.5.0",
-        "semver": "^5.5.0",
         "tns-core-modules": "^4.0.0",
         "tns-platform-declarations": "^4.0.0",
-        "tslint": "^5.9.1",
-        "typescript": "^2.6.2",
-        "zone.js": "^0.8.26"
+        "typescript": "~2.7.2",
+        "nativescript-angular": "^5.0.0",
+        "@angular/core": "~5.0.0",
+        "@angular/common": "~5.0.0",
+        "@angular/compiler": "~5.0.0",
+        "@angular/compiler-cli": "~5.0.0",
+        "rxjs": "5.4.2",
+        "zone.js": "~0.8.4",
+        "tslint": "~5.4.3"
     },
     "dependencies": {},
     "bootstrapper": "nativescript-plugin-seed"
