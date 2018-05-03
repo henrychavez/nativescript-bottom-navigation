@@ -3,6 +3,7 @@ import { BottomNavigationTab, BottomNavigation, OnTabSelectedEventData } from "n
 import { Page } from "tns-core-modules/ui/page";
 
 @Component({
+  moduleId: module.id,
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.css']

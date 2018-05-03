@@ -16,7 +16,9 @@ import { fromResource } from 'tns-core-modules/image-source';
 import { screen } from 'tns-core-modules/platform';
 import { ios } from 'tns-core-modules/application';
 
-declare const MiniTabBarItem, MiniTabBar, MiniTabBarDelegate: any;
+declare const MiniTabBarItem: any;
+declare const MiniTabBar: any;
+export declare class MiniTabBarDelegate { }
 
 export class BottomNavigationDelegate extends NSObject {
 
@@ -48,7 +50,7 @@ export class BottomNavigation extends BottomNavigationBase {
     this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
     this.nativeView = new MiniTabBar({ items: null });
     let bottomSafeArea = 0;
-    if ( ios.window.safeAreaInsets ) {
+    if (ios.window.safeAreaInsets) {
       bottomSafeArea = ios.window.safeAreaInsets.bottom;
     }
     const bottomBarHeight = 56 + bottomSafeArea;

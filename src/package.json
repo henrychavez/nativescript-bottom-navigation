@@ -13,7 +13,7 @@
     "scripts": {
         "tsc": "tsc -skipLibCheck",
         "ngc": "node --max-old-space-size=8192 ./node_modules/.bin/ngc",
-        "build": "npm i && tsc",
+        "build": "npm i && tsc && npm run ngc",
         "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
         "prepublishOnly": "npm run build",
         "test.android": "npm i && npm run tsc && npm run ci.tslint && cd ../demo && tns build android && tns test android --justlaunch",
@@ -68,7 +68,5 @@
         "rxjs": "5.4.2",
         "zone.js": "~0.8.4",
         "tslint": "~5.4.3"
-    },
-    "dependencies": {},
-    "bootstrapper": "nativescript-plugin-seed"
+    }
 }

@@ -1,4 +1,5 @@
 // Snapshot the ~/app.css and the theme
+require("globals");
 const application = require("application");
 require("ui/styling/style-scope");
 const appCssContext = require.context("~/", false, /^\.\/app\.(css|scss|less|sass)$/);
@@ -18,3 +19,4 @@ require("@angular/router");
 require("nativescript-angular/platform-static");
 require("nativescript-angular/forms");
 require("nativescript-angular/router");
+require("nativescript-bottom-navigation");

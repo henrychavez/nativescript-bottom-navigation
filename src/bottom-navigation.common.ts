@@ -17,49 +17,36 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
 
   /**
    * Get or set the Bottom Navigation tabs
-   * @type {Array<BottomNavigationTabBase>}
    */
   public tabs: BottomNavigationTabBase[];
 
   /**
    * Get or set the current selected tab index
-   *
-   * @type {number}
    */
   public selectedTabIndex: number = 0;
 
   /**
    * Get or set the color of the icon and title of the selected tab.
-   *
-   * @type {string}
    */
   public activeColor: string = 'blue';
 
   /**
    * Get or set the color of the icon and title of not selected tabs.
-   *
-   * @type {string}
    */
   public inactiveColor: string = 'gray';
 
   /**
    * Get or set the backgroundColor of the bottomNavigation
-   *
-   * @type {string}
    */
   public backgroundColor: string = 'white';
 
   /**
    * Get or set the keyLineColor of the bottomNavigation only for iOS
-   *
-   * @type {string}
    */
   public keyLineColor: string = '#eeeeee';
 
   /**
    * Method allowing to manually select a tab
-   *
-   * @param {number} index
    */
   public selectTab(index: number): void {
     if (index !== this.selectedTabIndex) {

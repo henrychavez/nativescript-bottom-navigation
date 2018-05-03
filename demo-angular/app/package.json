@@ -1,4 +1,7 @@
 {
+  "android": {
+    "v8Flags": "--expose_gc"
+  },
   "main": "main.js",
   "name": "nativescript-template-ng-tutorial",
   "version": "5.2.0"
