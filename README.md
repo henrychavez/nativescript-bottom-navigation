@@ -7,9 +7,17 @@ Nativescript plugin for Android & iOS to have the Bottom Navigation bar.
 
 <img alt="iOS" src="screenshots/screenshot-ios.png" width="250">
 
+## Contents
+1. [Installation](#installation)
+2. [Usage with Javascript](#usage)
+3. [Usage with Angular](#angular)
+4. [Usage with Vue](#vue)
+5. [Css Styling](#css-styling)
+6. [API](#api)
+
 ## Prerequisites / Requirements
 
-You need the version of NS3 to use this plugin.
+You need the version of NS3 or higher to use this plugin.
 
 ## Installation
 
@@ -203,6 +211,37 @@ export class AppComponent {
   }
 }
 ```
+
+#### Vue
+
+If you want to use this plugin with Vue, the only thing you have to do is register de element in your `app.js` or `main.js` as I'll show you below:
+
+```javascript
+Vue.registerElement('BottomNavigation', () => require('nativescript-bottom-navigation').BottomNavigation);
+Vue.registerElement('BottomNavigationTab', () => require('nativescript-bottom-navigation').BottomNavigationTab);
+```
+
+This will register `BottomNavigation` and `BottomNavigationTab` to your `Vue` instance and now you can use the plugin as follows:
+
+```xml
+<GridLayout rows="*, auto">
+    <StackLayout row="0">
+       <Label text="content"></Label>
+    </StackLayout>
+    <BottomNavigation activeColor="red"
+                      inactiveColor="yellow"
+                      backgroundColor="black"
+                      keyLineColor="black"
+                      @tabSelected="onBottomNavigationTabSelected"
+                      row="1">
+        <BottomNavigationTab title="First" icon="ic_home" />
+        <BottomNavigationTab title="Second" icon="ic_view_list" />
+        <BottomNavigationTab title="Third" icon="ic_menu" />
+    </BottomNavigation>
+</GridLayout>
+```
+
+You can find more information of how to use nativescript plugins with Vue [Here!](https://nativescript-vue.org/en/docs/getting-started/nativescript-plugins/)
 
 #### CSS Styling
 
