@@ -1,6 +1,6 @@
 # Nativescript Bottom Navigation
 
-Nativescript plugin for Android & iOS to have the Bottom Navigation bar.
+Nativescript plugin for Android & iOS to have the Bottom Navigation bar following the Material Design Guidelines.
 
 [![npm](https://img.shields.io/npm/v/nativescript-bottom-navigation.svg)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![npm](https://img.shields.io/npm/dt/nativescript-bottom-navigation.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![Build Status](https://travis-ci.org/henrychavez/nativescript-bottom-navigation.svg?branch=master)](https://travis-ci.org/henrychavez/nativescript-bottom-navigation)
 
@@ -17,7 +17,7 @@ Nativescript plugin for Android & iOS to have the Bottom Navigation bar.
 
 ## Prerequisites / Requirements
 
-You need the version of NS3 or higher to use this plugin.
+You need the version of NS3 or later to use this plugin.
 
 ## Installation
 
@@ -163,6 +163,7 @@ As the examples in the Javascript/Typescript version you can use the `tabs` prop
                       backgroundColor="black"
                       keyLineColor="black"
                       (tabSelected)="onBottomNavigationTabSelected($event)"
+                      (tabPressed)="onBottomNavigationTabPressed($event)"
                       row="1"></BottomNavigation>
 </GridLayout>
 ```
@@ -179,6 +180,7 @@ or you can declare the BottomNavigationTabs in your html directly
                       backgroundColor="black"
                       keyLineColor="black"
                       (tabSelected)="onBottomNavigationTabSelected($event)"
+                      (tabPressed)="onBottomNavigationTabPressed($event)"
                       row="1">
         <BottomNavigationTab title="First" icon="ic_home"></BottomNavigationTab>
         <BottomNavigationTab title="Second" icon="ic_view_list"></BottomNavigationTab>
@@ -189,7 +191,7 @@ or you can declare the BottomNavigationTabs in your html directly
 
 ```javascript
 import { Component, OnInit } from "@angular/core";
-import { BottomNavigation, BottomNavigationTab, OnTabSelectedEventData } from 'nativescript-bottom-navigation';
+import { BottomNavigation, BottomNavigationTab, OnTabPressedEventData, OnTabSelectedEventData } from 'nativescript-bottom-navigation';
 
 @Component(
   {
@@ -205,6 +207,10 @@ export class AppComponent {
     new BottomNavigationTab('Second', 'ic_view_list'),
     new BottomNavigationTab('Third', 'ic_menu')
   ];
+
+  onBottomNavigationTabPressed(args: OnTabPressedEventData): void {
+    console.log(`Tab pressed:  ${args.index}`);
+  }
 
   onBottomNavigationTabSelected(args: OnTabSelectedEventData): void {
     console.log(`Tab selected:  ${args.oldIndex}`);
@@ -252,7 +258,6 @@ You can also use your css file to set or change the activeColor, inactiveColor &
     tab-active-color: green;
     tab-inactive-color: black;
     tab-background-color: blue;
-    tab-keyline-color: blue;
 }
 ```
 
@@ -262,6 +267,7 @@ You can also use your css file to set or change the activeColor, inactiveColor &
 2. [BottomNavigationTab](#bottom-navigation-tab)
 
 ** properties (bindable) = properties settable thew XML/HTML
+** events = event properties settable thew XML/HTML
 ** properties (internal) = properties settable thew JS/TS instance
 
 # Bottom Navigation
@@ -274,7 +280,13 @@ You can also use your css file to set or change the activeColor, inactiveColor &
 | activeColor | false | "blue" | `String` | Color of the BottomNavigationTab when it's selected  |
 | inactiveColor | false | "gray" | `String` | Color of the BottomNavigationTab when it's not selected  |
 | backgroundColor | false | "white" | `String` | Color of the BottomNavigation background  |
-| keyLineColor | false | "#eeeeee" | `String` | Color of the BottomNavigation keyLine (Top border)  |
+
+#### Events
+
+| Property | Required | Default | Type | Description |
+| --- | --- | --- | --- | --- |
+| tabSelected | false | null | `function ($event: OnTabSelectedEventData) {}` | Function fired every time the user select a new tab that receive an event object |
+| tabPressed | false | null | `function ($event: OnTabPressedEventData) {}` | Function fired every time the user tap a tab with `selectable: false` that receive an event object |
 
 #### Properties (internal)
 

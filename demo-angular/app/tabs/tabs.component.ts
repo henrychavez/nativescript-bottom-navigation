@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BottomNavigationTab, BottomNavigation, OnTabSelectedEventData } from "nativescript-bottom-navigation";
+import { BottomNavigationTab, BottomNavigation, OnTabPressedEventData, OnTabSelectedEventData } from "nativescript-bottom-navigation";
 import { Page } from "tns-core-modules/ui/page";
 
 @Component({
@@ -25,9 +25,14 @@ export class TabsComponent implements OnInit {
     this._bottomNavigation = this.page.getViewById('bottomNavigation');
   }
 
+  onBottomNavigationTabPressed(args: OnTabPressedEventData): void {
+    alert('This item has selectable: false, and should be used to perform actions');
+    console.log(`pressed tab index:  ${args.index}`);
+  }
+
   onBottomNavigationTabSelected(args: OnTabSelectedEventData): void {
     this.selectedTab = args.newIndex;
-    if (this.selectedTab === 1 ) {
+    if (this.selectedTab === 1) {
       alert('This item has selectable: false, and should be used to perform actions');
     }
     console.log(`old tab index:  ${args.oldIndex}`);

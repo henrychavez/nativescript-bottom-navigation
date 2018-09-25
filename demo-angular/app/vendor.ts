@@ -1,5 +1,5 @@
 // Snapshot the ~/app.css and the theme
-require("globals");
+require("globals/globals");
 const application = require("application");
 require("ui/styling/style-scope");
 const appCssContext = require.context("~/", false, /^\.\/app\.(css|scss|less|sass)$/);

@@ -1,6 +1,10 @@
 import { EventData } from 'tns-core-modules/data/observable';
 import { AddChildFromBuilder, View } from 'tns-core-modules/ui/core/view';
 
+export declare interface OnTabPressedEventData extends EventData {
+  index: number;
+}
+
 export declare interface OnTabSelectedEventData extends EventData {
   oldIndex: number;
   newIndex: number;

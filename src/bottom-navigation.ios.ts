@@ -15,26 +15,43 @@ import { Color } from 'tns-core-modules/color';
 import { fromResource } from 'tns-core-modules/image-source';
 import { screen } from 'tns-core-modules/platform';
 import { ios } from 'tns-core-modules/application';
+import { layout } from 'tns-core-modules/ui/core/view/view';
 
-declare const MiniTabBarItem: any;
-declare const MiniTabBar: any;
-export declare class MiniTabBarDelegate { }
+declare const MDCBottomNavigationBar: any;
+declare const UITabBarItem: any;
+
+type MDCBottomNavigationBar = any;
+
+export declare class MDCBottomNavigationBarDelegate { }
 
 export class BottomNavigationDelegate extends NSObject {
 
-  public static ObjCProtocols = [MiniTabBarDelegate];
+  public static ObjCProtocols = [MDCBottomNavigationBarDelegate];
   private _owner: WeakRef<BottomNavigation>;
 
   public static initWithOwner(owner: WeakRef<BottomNavigation>): BottomNavigationDelegate {
-    let delegate = <BottomNavigationDelegate>BottomNavigationDelegate.new() as BottomNavigationDelegate;
+    const delegate = <BottomNavigationDelegate>BottomNavigationDelegate.new() as BottomNavigationDelegate;
     delegate._owner = owner;
 
     return delegate;
   }
 
-  public onTabSelected(index: number) {
-    let bar: BottomNavigation = this._owner.get();
-    bar.onTabSelected(index);
+  public bottomNavigationBarDidSelectItem(navigationBar: MDCBottomNavigationBar, item: UITabBarItem) {
+    const bottomNavigation: BottomNavigation = this._owner.get();
+    if (bottomNavigation.selectedTabIndex === item.tag) { return; }
+
+    bottomNavigation.onTabSelected(item.tag);
+  }
+
+  public bottomNavigationBarShouldSelectItem(bottomNavigationBar: MDCBottomNavigationBar, item: UITabBarItem): boolean {
+    const bottomNavigation: BottomNavigation = this._owner.get();
+    const bottomNavigationTab = bottomNavigation.tabs[item.tag];
+
+    if (!bottomNavigationTab.selectable) {
+      bottomNavigation.onTabPressed(item.tag);
+    }
+
+    return bottomNavigationTab.selectable;
   }
 }
 
@@ -48,23 +65,15 @@ export class BottomNavigation extends BottomNavigationBase {
 
   createNativeView(): Object {
     this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
-    this.nativeView = new MiniTabBar({ items: null });
-    let bottomSafeArea = 0;
-    if (ios.window.safeAreaInsets) {
-      bottomSafeArea = ios.window.safeAreaInsets.bottom;
-    }
-    const bottomBarHeight = 56 + bottomSafeArea;
-    this.nativeView.frame = CGRectMake(0, screen.mainScreen.heightDIPs - bottomBarHeight, screen.mainScreen.widthDIPs, bottomBarHeight);
+    this.nativeView = MDCBottomNavigationBar.alloc().init();
 
     return this.nativeView;
   }
 
   initNativeView(): void {
-    this.nativeView.tintColor = new Color(this.activeColor).ios;
-    this.nativeView.inactiveColor = new Color(this.inactiveColor).ios;
-    this.nativeView.backgroundColor = new Color(this.backgroundColor).ios;
-    this.nativeView.keyLine.backgroundColor = new Color(this.keyLineColor).ios;
-    this.nativeView.backgroundBlurEnabled = false;
+    this.nativeView.selectedItemTintColor = new Color(this.activeColor).ios;
+    this.nativeView.unselectedItemTintColor = new Color(this.inactiveColor).ios;
+    this.nativeView.barTintColor = new Color(this.backgroundColor).ios;
   }
 
   disposeNativeView() {
@@ -76,17 +85,38 @@ export class BottomNavigation extends BottomNavigationBase {
     super.onLoaded();
   }
 
+  layoutNativeView(left: number, top: number, right: number, bottom: number): void {
+    if (!this.nativeViewProtected) {
+      return;
+    }
+
+    let bottomSafeArea = 0;
+    if (ios.window.safeAreaInsets) {
+      bottomSafeArea = ios.window.safeAreaInsets.bottom;
+    }
+
+    const viewSize: CGSize = CGSizeMake(screen.mainScreen.widthDIPs, screen.mainScreen.heightDIPs);
+    const nativeViewSize: CGSize = this.nativeView.sizeThatFits(viewSize);
+    const bottomBarHeight = nativeViewSize.height + bottomSafeArea;
+
+    const nativeView = this.nativeViewProtected;
+    const frame = CGRectMake(
+      0,
+      layout.toDeviceIndependentPixels(top),
+      viewSize.width,
+      bottomBarHeight
+    );
+
+    (this as any)._setNativeViewFrame(nativeView, frame);
+  }
+
   createTabs(tabs: BottomNavigationTab[]) {
     if (!this.tabs) { this.tabs = tabs; }
-    let bottomNavigationTabs = <BottomNavigationTab[]>[];
-    for (let tab of tabs) {
-      tab.parent = new WeakRef(this);
-      let miniTabBarItem = new MiniTabBarItem({ title: tab.title, icon: fromResource(tab.icon).ios });
-      miniTabBarItem.selectable = tab.selectable;
-      bottomNavigationTabs.push(miniTabBarItem);
-    }
-    this.nativeView.setTabs(bottomNavigationTabs);
-    this.nativeView.selectItemAnimated(this.selectedTabIndex, true);
+    const toUITabBarItem = (tab: BottomNavigationTab, tag: number) => UITabBarItem.alloc().initWithTitleImageTag(tab.title, fromResource(tab.icon).ios, tag);
+    const bottomNavigationTabs: UITabBarItem[] = tabs.map(toUITabBarItem);
+
+    this.nativeView.items = bottomNavigationTabs;
+    this.nativeView.selectedItem = bottomNavigationTabs[this.selectedTabIndex];
   }
 
   [tabsProperty.getDefault](): BottomNavigationTab[] {
@@ -98,40 +128,39 @@ export class BottomNavigation extends BottomNavigationBase {
   }
 
   [activeColorProperty.setNative](activeColor: string) {
-    this.nativeView.tintColor = new Color(activeColor).ios;
+    this.nativeView.selectedItemTintColor = new Color(activeColor).ios;
   }
 
   [activeColorCssProperty.setNative](activeColor: Color) {
-    this.nativeView.tintColor = activeColor.ios;
+    this.nativeView.selectedItemTintColor = activeColor.ios;
   }
 
   [inactiveColorProperty.setNative](inactiveColor: string) {
-    this.nativeView.inactiveColor = new Color(inactiveColor).ios;
+    this.nativeView.unselectedItemTintColor = new Color(inactiveColor).ios;
   }
 
   [inactiveColorCssProperty.setNative](inactiveColor: Color) {
-    this.nativeView.inactiveColor = inactiveColor.ios;
+    this.nativeView.unselectedItemTintColor = inactiveColor.ios;
   }
 
   [backgroundColorProperty.setNative](backgroundColor: string) {
-    this.nativeView.backgroundColor = new Color(backgroundColor).ios;
+    this.nativeView.barTintColor = new Color(backgroundColor).ios;
   }
 
   [backgroundColorCssProperty.setNative](backgroundColor: Color) {
-    this.nativeView.backgroundColor = backgroundColor.ios;
+    this.nativeView.barTintColor = backgroundColor.ios;
   }
 
   [keyLineColorProperty.setNative](keyLineColor: string) {
-    console.log('seas', keyLineColor);
-    this.nativeView.keyLine.backgroundColor = new Color(keyLineColor).ios;
+    // this.nativeView.keyLine.backgroundColor = new Color(keyLineColor).ios;
   }
 
   [keyLineColorCssProperty.setNative](keyLineColor: Color) {
-    this.nativeView.keyLine.backgroundColor = keyLineColor.ios;
+    // this.nativeView.keyLine.backgroundColor = keyLineColor.ios;
   }
 
   protected selectTabNative(index: number): void {
-    this.nativeView.selectItemAnimated(index, true);
+    this.nativeView.selectedItem = this.nativeView.items[index];
   }
 
 }

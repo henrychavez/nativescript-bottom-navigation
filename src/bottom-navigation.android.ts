@@ -36,11 +36,17 @@ export class BottomNavigation extends BottomNavigationBase {
           return owner.get();
         },
         onTabSelected: function (position: number, wasSelected: boolean): boolean {
-          if (this.owner && !wasSelected && this.owner.selectedTabIndex !== position) {
-            return this.owner.onTabSelected(position);
+          const bottomNavigationTab = this.owner.tabs[position];
+          if (!wasSelected && bottomNavigationTab.selectable) {
+            this.owner.onTabSelected(position);
           }
 
-          return true;
+          // I'm using a different if to avoid to fire the event on bottomNavigation initialization
+          if (!wasSelected && !bottomNavigationTab.selectable) {
+            this.owner.onTabPressed(position);
+          }
+
+          return bottomNavigationTab.selectable;
         }
       }
     ));

@@ -6,6 +6,13 @@ import { Color } from 'tns-core-modules/color';
 import { booleanConverter } from 'tns-core-modules/ui/core/view-base';
 
 /**
+ * Event interface for tab pressed event
+ */
+export interface OnTabPressedEventData extends EventData {
+  index: number;
+}
+
+/**
  * Event interface for tab selected event
  */
 export interface OnTabSelectedEventData extends EventData {
@@ -28,7 +35,7 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
   /**
    * Get or set the color of the icon and title of the selected tab.
    */
-  public activeColor: string = 'blue';
+  public activeColor: string = 'green';
 
   /**
    * Get or set the color of the icon and title of not selected tabs.
@@ -54,17 +61,24 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
     }
   }
 
-  public onTabSelected(index: number): boolean {
+  public onTabPressed(index: number) {
+    let eventData: OnTabPressedEventData = {
+      eventName: 'tabPressed',
+      object: this,
+      index: index
+    };
+    this.notify(eventData);
+  }
+
+  public onTabSelected(index: number) {
     let eventData: OnTabSelectedEventData = {
       eventName: 'tabSelected',
       object: this,
       oldIndex: this.selectedTabIndex || 0,
       newIndex: index
     };
-    if (this.tabs[index].selectable) { this.selectedTabIndex = index; }
+    this.selectedTabIndex = index;
     this.notify(eventData);
-
-    return this.tabs[index].selectable;
   }
 
   _addChildFromBuilder(name: string, value: any): void {
