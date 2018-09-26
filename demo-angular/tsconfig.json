@@ -15,7 +15,11 @@
         "baseUrl": ".",
         "paths": {
             "*": [
+                "./node_modules/tns-core-modules/*",
                 "./node_modules/*"
+            ],
+            "~/*": [
+                "app/*"
             ]
         },
         "pretty": true,
@@ -27,13 +31,13 @@
         "noImplicitReturns": true,
         "noImplicitUseStrict": false,
         "noFallthroughCasesInSwitch": true,
-        "typeRoots": [
-            "./node_modules/@types",
-            "./node_modules"
-        ],
-        "types": []
     },
+    "include": [
+        "../src",
+        "**/*"
+    ],
     "exclude": [
+        "../src/node_modules",
         "node_modules",
         "platforms"
     ],
