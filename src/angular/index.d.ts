@@ -1,4 +1,1 @@
-import { NgModule } from '@angular/core';
-
-@NgModule()
-export declare class NativescriptBottomNavigationModule {}
+export * from './nativescript-bottom-navigation.module';
