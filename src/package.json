@@ -1,6 +1,6 @@
 {
     "name": "nativescript-bottom-navigation",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Nativescript plugin to add a bottom navigation component for Android & iOS",
     "main": "bottom-navigation",
     "typings": "index.d.ts",

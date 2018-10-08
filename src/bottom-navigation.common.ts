@@ -176,10 +176,15 @@ keyLineColorCssProperty.register(Style);
 
 export class BottomNavigationTabBase {
 
-  constructor(title: string, icon: string, selectable?: boolean, parent?: WeakRef<BottomNavigationBase>) {
+  constructor(
+    title: string,
+    icon: string,
+    selectable: boolean = true,
+    parent?: WeakRef<BottomNavigationBase>
+  ) {
     this._title = title;
     this._icon = icon;
-    if (selectable) { this._selectable = selectable; }
+    this._selectable = selectable;
     if (parent) { this._parent = parent; }
   }
 

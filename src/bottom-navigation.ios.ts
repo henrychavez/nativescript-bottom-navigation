@@ -46,7 +46,6 @@ export class BottomNavigationDelegate extends NSObject {
   public bottomNavigationBarShouldSelectItem(bottomNavigationBar: MDCBottomNavigationBar, item: UITabBarItem): boolean {
     const bottomNavigation: BottomNavigation = this._owner.get();
     const bottomNavigationTab = bottomNavigation.tabs[item.tag];
-
     if (!bottomNavigationTab.selectable) {
       bottomNavigation.onTabPressed(item.tag);
     }
