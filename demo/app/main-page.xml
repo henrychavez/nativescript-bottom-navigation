@@ -14,7 +14,7 @@
                                   loaded="loaded"
                                   row="1">
           <bottomBar:BottomNavigationTab title="First" icon="ic_home" />
-          <bottomBar:BottomNavigationTab title="Second" icon="ic_view_list" />
+          <bottomBar:BottomNavigationTab title="Second" icon="ic_view_list" selectable="false" />
           <bottomBar:BottomNavigationTab title="Third" icon="ic_menu" />
       </bottomBar:BottomNavigation>
   </GridLayout>
