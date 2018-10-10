@@ -12,10 +12,10 @@
     "build.android.plugin": "cd ../src && npm i && tsc && tns plugin build && npm run ngc",
     "build.ios.plugin": "cd ../src && npm i && tsc && npm run ngc",
     "ci.tslint": "npm i && tslint --config '../tslint.json' 'src/**/*.ts' --exclude '**/node_modules/**'",
-    "ci.android.build": "npm run build.android.plugin && ../demo-angular && tns build android",
-    "ci.ios.build": "npm run build.ios.plugin && ../demo-angular && tns build ios",
-    "ci.android.webpack.build": "npm run build.android.plugin && ../demo-angular && tns build android --bundle --env.uglify --env.snapshot --env.aot",
-    "ci.ios.webpack.build": "npm run build.ios.plugin && ../demo-angular && tns build ios --bundle --env.uglify --env.aot"
+    "ci.android.build": "npm run build.android.plugin && tns build android",
+    "ci.ios.build": "npm run build.ios.plugin && tns build ios",
+    "ci.android.webpack.build": "npm run build.android.plugin && tns build android --bundle --env.uglify --env.snapshot --env.aot",
+    "ci.ios.webpack.build": "npm run build.ios.plugin && tns build ios --bundle --env.uglify --env.aot"
   },
   "dependencies": {
     "@angular/animations": "~6.1.0",
