@@ -8,13 +8,12 @@
         "noEmitOnError": true,
         "lib": [
             "es6",
-            "dom",
-            "es2015.iterable"
+            "dom"
         ],
         "baseUrl": ".",
         "paths": {
             "~/*": [
-                "src/*"
+                "app/*"
             ],
             "*": [
                 "./node_modules/tns-core-modules/*",
@@ -22,12 +21,7 @@
             ]
         }
     },
-    "include": [
-        "../src/**/*",
-        "**/*"
-    ],
     "exclude": [
-        "../src/node_modules",
         "node_modules",
         "platforms"
     ]

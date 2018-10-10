@@ -1,21 +1,55 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:bottomBar="nativescript-bottom-navigation"
-      loaded="pageLoaded">
-  <ActionBar title="My App" class="action-bar"></ActionBar>
-  <GridLayout columns="*"
-              rows="*, auto">
-      <StackLayout class="p-20"
-                    row="0">
-          <Label text="bottom-navigation" class="t-20 text-center c-black" textWrap="true" />
-          <Label text="test" class="t-20 text-center c-black" textWrap="true" />
-          <Button text="Change Background" tap="changeBackground" />
-      </StackLayout>
-      <bottomBar:BottomNavigation class="bottom-nav"
-                                  loaded="loaded"
-                                  row="1">
-          <bottomBar:BottomNavigationTab title="First" icon="ic_home" />
-          <bottomBar:BottomNavigationTab title="Second" icon="ic_view_list" selectable="false" />
-          <bottomBar:BottomNavigationTab title="Third" icon="ic_menu" />
-      </bottomBar:BottomNavigation>
-  </GridLayout>
+<Page 
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:bottomBar="nativescript-bottom-navigation"
+>
+    <Page.actionBar>
+        <ActionBar 
+            title="My App"
+            icon="" 
+            class="action-bar"
+        ></ActionBar>
+    </Page.actionBar>
+    <GridLayout
+        columns="*"
+        rows="*, auto"
+    >
+        <StackLayout 
+            class="p-20"
+            row="0"
+        >
+            <Label 
+                text="bottom-navigation"
+                class="t-20 text-center c-black"
+                textWrap="true" 
+            />
+            <Label
+                text="test"
+                class="t-20 text-center c-black"
+                textWrap="true"
+            />
+            <Button
+                text="Change Background"
+                tap="changeBackground" 
+            />
+        </StackLayout>
+        <bottomBar:BottomNavigation 
+            class="bottom-nav"
+            loaded="loaded"
+            row="1"
+        >
+            <bottomBar:BottomNavigationTab 
+                title="First"
+                icon="ic_home" 
+            />
+            <bottomBar:BottomNavigationTab 
+                title="Second" 
+                icon="ic_view_list" 
+                selectable="false" 
+            />
+            <bottomBar:BottomNavigationTab 
+                title="Third"
+                icon="ic_menu" 
+            />
+        </bottomBar:BottomNavigation>
+    </GridLayout>
 </Page>
