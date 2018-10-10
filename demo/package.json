@@ -10,8 +10,8 @@
   },
   "main": "app.js",
   "scripts": {
-    "build.android.plugin": "cd ../src && npm i && npm run tsc && tns plugin build",
-    "build.ios.plugin": "cd ../src && npm i && npm run tsc",
+    "build.android.plugin": "cd ../src && npm i && tsc && tns plugin build",
+    "build.ios.plugin": "cd ../src && npm i && tsc",
     "ci.tslint": "npm i && tslint --config '../tslint.json' 'app/**/*.ts' --exclude '**/node_modules/**'",
     "ci.android.build": "npm run build.android.plugin && tns build android",
     "ci.ios.build": "npm run build.ios.plugin && tns build ios",

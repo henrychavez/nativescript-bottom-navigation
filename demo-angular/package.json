@@ -9,8 +9,8 @@
     }
   },
   "scripts": {
-    "build.android.plugin": "cd ../src && npm i && npm run tsc && tns plugin build && npm run ngc",
-    "build.ios.plugin": "cd ../src && npm i && npm run tsc && npm run ngc",
+    "build.android.plugin": "cd ../src && npm i && tsc && tns plugin build && npm run ngc",
+    "build.ios.plugin": "cd ../src && npm i && tsc && npm run ngc",
     "ci.tslint": "npm i && tslint --config '../tslint.json' 'src/**/*.ts' --exclude '**/node_modules/**'",
     "ci.android.build": "npm run build.android.plugin && tns build android",
     "ci.ios.build": "npm run build.ios.plugin && tns build ios",
