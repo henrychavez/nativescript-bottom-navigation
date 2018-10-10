@@ -19,9 +19,7 @@ matrix:
       language: node_js 
       node_js: "8"
       jdk: oraclejdk8
-      script:
-        - cd demo && npm run ci.ios.webpack.build
-        - cd ../demo-angular && npm run ci.ios.webpack.build
+      script: script: cd src && npm run build.iosOnly && cd ../demo && npm i && tns build ios --env.uglify && cd ../demo-angular && npm i && tns build ios --env.uglify --env.aot
     - language: android
       os: linux
       env:
@@ -29,17 +27,15 @@ matrix:
       jdk: oraclejdk8
       before_install: nvm install 8
       script:
-        - cd demo && npm run ci.android.webpack.build
-        - cd ../demo-angular && npm run ci.android.webpack.build
+        - cd src && npm run build && cd ../demo && npm i && tns build android --env.uglify --env.snapshot
+        - cd ../demo-angular && npm i && tns build android --env.uglify --env.snapshot --env.aot
     - language: android
       env: 
         - BuildAndroid="27"
       os: linux
       jdk: oraclejdk8
       before_install: nvm install 8.11.4
-      script:
-        - cd demo && npm run ci.android.build
-        - cd ../demo-angular && npm run ci.android.build
+      script: cd demo && npm run ci.android.build && cd ../demo-angular && npm run ci.android.build
     - os: osx
       env: 
         - BuildiOS="11"
@@ -48,9 +44,7 @@ matrix:
       language: node_js 
       node_js: "8"
       jdk: oraclejdk8
-      script: 
-        - cd demo && npm run ci.ios.build
-        - cd ../demo-angular && npm run ci.ios.build
+      script: cd demo && npm run ci.ios.build && cd ../demo-angular && npm run ci.ios.build
 
 android:
   components:

@@ -9,13 +9,11 @@
     }
   },
   "scripts": {
-    "build.android.plugin": "cd ../src && npm i && tsc && tns plugin build && npm run ngc",
-    "build.ios.plugin": "cd ../src && npm i && tsc && npm run ngc",
-    "ci.tslint": "npm i && tslint --config '../tslint.json' 'src/**/*.ts' --exclude '**/node_modules/**'",
-    "ci.android.build": "npm run build.android.plugin && tns build android",
-    "ci.ios.build": "npm run build.ios.plugin && tns build ios",
-    "ci.android.webpack.build": "npm run build.android.plugin && tns build android --env.uglify --env.snapshot --env.aot",
-    "ci.ios.webpack.build": "npm run build.ios.plugin && tns build ios --env.uglify --env.aot"
+    "build.plugin": "cd ../src && npm run build",
+    "ci.tslint": "npm i && tslint --config '../tslint.json' 'app/**/*.ts' --exclude '**/node_modules/**'",
+    "ci.android.build": "cd ../src && npm run build && cd ../demo-angular && tns build android",
+    "ci.ios.build": "cd ../src && npm run build.iosOnly && cd ../demo-angular && tns build ios",
+    "generate-android-snapshot": "generate-android-snapshot --targetArchs arm,arm64,ia32 --install"
   },
   "dependencies": {
     "@angular/animations": "~6.1.0",
