@@ -1,5 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, Input } from "@angular/core";
-import { BottomNavigation, BottomNavigationTab } from '../';
+import { BottomNavigation, BottomNavigationTab, TitleVisibility } from '../';
 import { isBlank } from 'nativescript-angular/lang-facade';
 
 @Directive(
@@ -14,6 +14,20 @@ export class BottomNavigationDirective implements AfterViewInit {
 
   constructor(element: ElementRef) {
     this.bottomNavigation = element.nativeElement;
+  }
+
+  private _titleVisibility: TitleVisibility;
+
+  @Input()
+  get titleVisibility(): TitleVisibility {
+    return this._titleVisibility;
+  }
+
+  set titleVisibility(value: TitleVisibility) {
+    this._titleVisibility = value;
+    if (this._viewInitialized) {
+      this.bottomNavigation.titleVisibility = value;
+    }
   }
 
   private _activeColor: string;
@@ -88,6 +102,7 @@ export class BottomNavigationDirective implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this._viewInitialized = true;
+    if (!isBlank(this._titleVisibility)) { this.bottomNavigation.titleVisibility = this._titleVisibility; }
     if (!isBlank(this._activeColor)) { this.bottomNavigation.activeColor = this._activeColor; }
     if (!isBlank(this._inactiveColor)) { this.bottomNavigation.inactiveColor = this._inactiveColor; }
     if (!isBlank(this._backgroundColor)) { this.bottomNavigation.backgroundColor = this._backgroundColor; }

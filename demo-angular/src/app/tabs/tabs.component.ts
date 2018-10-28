@@ -31,10 +31,6 @@ export class TabsComponent implements OnInit {
   }
 
   onBottomNavigationTabSelected(args: OnTabSelectedEventData): void {
-    this.selectedTab = args.newIndex;
-    if (this.selectedTab === 1) {
-      alert('This item has selectable: false, and should be used to perform actions');
-    }
     console.log(`old tab index:  ${args.oldIndex}`);
     console.log(`selected tab index:  ${args.newIndex}`);
   }

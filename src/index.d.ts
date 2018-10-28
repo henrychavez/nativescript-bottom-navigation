@@ -10,11 +10,15 @@ export declare interface OnTabSelectedEventData extends EventData {
   newIndex: number;
 }
 
+export type TitleVisibility = 'always' | 'selected' | 'never';
+
 export declare abstract class BottomNavigationBase extends View implements AddChildFromBuilder {
 
   public tabs: BottomNavigationTabBase[];
 
   public selectedTabIndex: number;
+
+  public titleVisibility: TitleVisibility;
 
   public activeColor: string;
 
@@ -22,6 +26,7 @@ export declare abstract class BottomNavigationBase extends View implements AddCh
 
   public backgroundColor: string;
 
+  @Deprecated
   public keyLineColor: string;
 
   public selectTab(index: number): void;

@@ -20,6 +20,8 @@ export interface OnTabSelectedEventData extends EventData {
   newIndex: number;
 }
 
+export type TitleVisibility = 'always' | 'selected' | 'never';
+
 export abstract class BottomNavigationBase extends View implements AddChildFromBuilder {
 
   /**
@@ -31,6 +33,11 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
    * Get or set the current selected tab index
    */
   public selectedTabIndex: number = 0;
+
+  /**
+   * Get ot Set the Title Visiblity
+   */
+  public titleVisibility: TitleVisibility = 'selected';
 
   /**
    * Get or set the color of the icon and title of the selected tab.
@@ -49,6 +56,7 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
 
   /**
    * Get or set the keyLineColor of the bottomNavigation only for iOS
+   * @deprecated
    */
   public keyLineColor: string = '#eeeeee';
 
@@ -101,6 +109,14 @@ export const tabsProperty = new Property<BottomNavigationBase, BottomNavigationT
 );
 
 tabsProperty.register(BottomNavigationBase);
+
+export const titleVisibilityProperty = new Property<BottomNavigationBase, TitleVisibility>(
+  {
+    name: 'titleVisibility'
+  }
+);
+
+titleVisibilityProperty.register(BottomNavigationBase);
 
 export const activeColorProperty = new Property<BottomNavigationBase, string>(
   {

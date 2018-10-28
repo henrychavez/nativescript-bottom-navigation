@@ -277,6 +277,7 @@ You can also use your css file to set or change the activeColor, inactiveColor &
 | Property | Required | Default | Type | Description |
 | --- | --- | --- | --- | --- |
 | tabs | true | null | `Array<BottomNavigationTab>` | Array containing the tabs for the BottomNavigation |
+| titleVisibility | false | "selected" | `"selected" | "always" | "never"` | Title Visibility of each BottomNavigationTab  |
 | activeColor | false | "blue" | `String` | Color of the BottomNavigationTab when it's selected  |
 | inactiveColor | false | "gray" | `String` | Color of the BottomNavigationTab when it's not selected  |
 | backgroundColor | false | "white" | `String` | Color of the BottomNavigation background  |

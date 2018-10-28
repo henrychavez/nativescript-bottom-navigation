@@ -10,15 +10,17 @@ import {
   tabsProperty,
   keyLineColorProperty,
   keyLineColorCssProperty,
+  TitleVisibility,
+  titleVisibilityProperty,
 } from './bottom-navigation.common';
 import { Color } from 'tns-core-modules/color';
 import { fromResource } from 'tns-core-modules/image-source';
 
 declare const com, android: any;
 
-let BitmapDrawable = android.graphics.drawable.BitmapDrawable;
-let AHBottomNavigation = com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
-let AHBottomNavigationItem = com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+const BitmapDrawable = android.graphics.drawable.BitmapDrawable;
+const AHBottomNavigation = com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+const AHBottomNavigationItem = com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 export class BottomNavigation extends BottomNavigationBase {
 
@@ -78,6 +80,24 @@ export class BottomNavigation extends BottomNavigationBase {
 
   [tabsProperty.setNative](value: BottomNavigationTab[]) {
     this.createTabs(value);
+  }
+
+  [titleVisibilityProperty.getDefault](): TitleVisibility {
+    return 'selected';
+  }
+
+  [titleVisibilityProperty.setNative](value: TitleVisibility) {
+    switch (value) {
+      case 'never':
+        this.nativeView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_HIDE);
+        break;
+      case 'always':
+        this.nativeView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
+        break;
+      default:
+        this.nativeView.setTitleState(AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE);
+        break;
+    }
   }
 
   [activeColorProperty.setNative](activeColor: string) {

@@ -9,7 +9,9 @@ import {
   inactiveColorProperty,
   tabsProperty,
   keyLineColorProperty,
-  keyLineColorCssProperty
+  keyLineColorCssProperty,
+  titleVisibilityProperty,
+  TitleVisibility
 } from './bottom-navigation.common';
 import { Color } from 'tns-core-modules/color';
 import { fromResource } from 'tns-core-modules/image-source';
@@ -21,6 +23,10 @@ declare const MDCBottomNavigationBar: any;
 declare const UITabBarItem: any;
 
 type MDCBottomNavigationBar = any;
+
+declare const MDCBottomNavigationBarTitleVisibilitySelected: any;
+declare const MDCBottomNavigationBarTitleVisibilityAlways: any;
+declare const MDCBottomNavigationBarTitleVisibilityNever: any;
 
 export declare class MDCBottomNavigationBarDelegate { }
 
@@ -124,6 +130,24 @@ export class BottomNavigation extends BottomNavigationBase {
 
   [tabsProperty.setNative](value: BottomNavigationTab[]) {
     this.createTabs(value);
+  }
+
+  [titleVisibilityProperty.getDefault](): TitleVisibility {
+    return 'selected';
+  }
+
+  [titleVisibilityProperty.setNative](value: TitleVisibility) {
+    switch (value) {
+      case 'never':
+        this.nativeView.titleVisibility = MDCBottomNavigationBarTitleVisibilityNever;
+        break;
+      case 'always':
+        this.nativeView.titleVisibility = MDCBottomNavigationBarTitleVisibilityAlways;
+        break;
+      default:
+        this.nativeView.titleVisibility = MDCBottomNavigationBarTitleVisibilitySelected;
+        break;
+    }
   }
 
   [activeColorProperty.setNative](activeColor: string) {

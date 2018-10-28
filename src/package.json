@@ -1,6 +1,6 @@
 {
     "name": "nativescript-bottom-navigation",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "Nativescript plugin to add a bottom navigation component for Android & iOS",
     "main": "bottom-navigation",
     "typings": "index.d.ts",
@@ -48,7 +48,7 @@
     ],
     "author": {
         "name": "Henry Chavez",
-        "email": "henrychavez@bytpher.com"
+        "email": "henry.chavez@bytpher.com"
     },
     "bugs": {
         "url": "https://github.com/henrychavez/nativescript-bottom-navigation/issues"
