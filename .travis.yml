@@ -52,9 +52,11 @@ android:
     - platform-tools
     - build-tools-26.0.2
     - build-tools-27.0.3
+    - build-tools-28.0.3
     - android-23
     - android-26
     - android-27
+    - android-28
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-21
 
