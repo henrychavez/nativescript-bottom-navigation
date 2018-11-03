@@ -4,28 +4,27 @@ Nativescript plugin for Android & iOS to have the Bottom Navigation bar followin
 
 [![npm](https://img.shields.io/npm/v/nativescript-bottom-navigation.svg)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![npm](https://img.shields.io/npm/dt/nativescript-bottom-navigation.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![Build Status](https://travis-ci.org/henrychavez/nativescript-bottom-navigation.svg?branch=master)](https://travis-ci.org/henrychavez/nativescript-bottom-navigation)
 
-
 <img alt="iOS" src="screenshots/screenshot-ios.png" width="250">
 
 ## Contents
-1. [Installation](#installation)
-2. [Usage with Javascript](#usage)
-3. [Usage with Angular](#angular)
-4. [Usage with Vue](#vue)
-5. [Css Styling](#css-styling)
-6. [API](#api)
+1.  [Installation](#installation)
+2.  [Usage with Javascript](#usage)
+3.  [Usage with Angular](#angular)
+4.  [Usage with Vue](#vue)
+5.  [Css Styling](#css-styling)
+6.  [API](#api)
 
-## Prerequisites / Requirements
+### Prerequisites / Requirements
 
 You need the version of NS3 or later to use this plugin.
 
-## Installation
+### Installation
 
 ```javascript
 tns plugin add nativescript-bottom-navigation
 ```
 
-## Usage 
+### Usage 
 
 Before start using the plugin you need to add the icons for android & iOS in your App_Resources directory.
 

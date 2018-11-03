@@ -10,11 +10,6 @@ package-lock.json
 !seed-tests/*.js
 seed-tests/seed-copy/**/*.*
 seed-tests/seed-copy-new-git-repo/**/*.*
-!demo/karma.conf.js
-!demo/app/*.js
-!demo-angular/karma.conf.js
-!demo/app/tests/*.js
-!demo-angular/app/tests/*.js
 demo/*.d.ts
 demo-angular/*.d.ts
 !demo/references.d.ts
