@@ -78,6 +78,14 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
     this.notify(eventData);
   }
 
+  public onTabReselected() {
+    let eventData: EventData = {
+      eventName: 'tabReselected',
+      object: this
+    };
+    this.notify(eventData);
+  }
+
   public onTabSelected(index: number) {
     let eventData: OnTabSelectedEventData = {
       eventName: 'tabSelected',
