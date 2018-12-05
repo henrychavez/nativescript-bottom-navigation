@@ -44,9 +44,11 @@ export class BottomNavigationDelegate extends NSObject {
 
   public bottomNavigationBarDidSelectItem(navigationBar: MDCBottomNavigationBar, item: UITabBarItem) {
     const bottomNavigation: BottomNavigation = this._owner.get();
-    if (bottomNavigation.selectedTabIndex === item.tag) { return; }
-
-    bottomNavigation.onTabSelected(item.tag);
+    if (bottomNavigation.selectedTabIndex === item.tag) {
+      bottomNavigation.onTabReselected();
+    } else {
+      bottomNavigation.onTabSelected(item.tag);
+    }
   }
 
   public bottomNavigationBarShouldSelectItem(bottomNavigationBar: MDCBottomNavigationBar, item: UITabBarItem): boolean {

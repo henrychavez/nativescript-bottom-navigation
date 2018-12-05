@@ -42,7 +42,9 @@ export class BottomNavigation extends BottomNavigationBase {
           if (!wasSelected && bottomNavigationTab.selectable) {
             this.owner.onTabSelected(position);
           }
-
+          if (wasSelected && bottomNavigationTab.selectable) {
+            this.owner.onTabReselected();
+          }
           // I'm using a different if to avoid to fire the event on bottomNavigation initialization
           if (!wasSelected && !bottomNavigationTab.selectable) {
             this.owner.onTabPressed(position);
