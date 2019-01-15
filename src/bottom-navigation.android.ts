@@ -11,6 +11,7 @@ import {
   keyLineColorProperty,
   keyLineColorCssProperty,
   TitleVisibility,
+  TitleVisibilityOptions,
   titleVisibilityProperty,
 } from './bottom-navigation.common';
 import { Color } from 'tns-core-modules/color';
@@ -23,15 +24,19 @@ const AHBottomNavigation = com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 const AHBottomNavigationItem = com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 
 export class BottomNavigation extends BottomNavigationBase {
+  protected titleVisibilityOptions: TitleVisibilityOptions = {
+    always: AHBottomNavigation.TitleState.ALWAYS_SHOW,
+    never: AHBottomNavigation.TitleState.ALWAYS_HIDE,
+    selected: AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE,
+  };
 
   get android(): any {
     return this.nativeView;
   }
 
   createNativeView(): Object {
+    const owner = new WeakRef(this);
     this.nativeView = new AHBottomNavigation(this._context);
-    let owner = new WeakRef(this);
-
     this.nativeView.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener(
       {
         get owner(): BottomNavigation {
@@ -43,13 +48,12 @@ export class BottomNavigation extends BottomNavigationBase {
             this.owner.onTabSelected(position);
           }
           if (wasSelected && bottomNavigationTab.selectable) {
-            this.owner.onTabReselected();
+            this.owner.onTabReselected(position);
           }
           // I'm using a different if to avoid to fire the event on bottomNavigation initialization
           if (!wasSelected && !bottomNavigationTab.selectable) {
             this.owner.onTabPressed(position);
           }
-
           return bottomNavigationTab.selectable;
         }
       }
@@ -57,6 +61,7 @@ export class BottomNavigation extends BottomNavigationBase {
 
     return this.nativeView;
   }
+
 
   initNativeView(): void {
     this.nativeView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
@@ -73,7 +78,8 @@ export class BottomNavigation extends BottomNavigationBase {
       let item = new AHBottomNavigationItem(tab.title, icon, new Color('white').android);
       this.nativeView.addItem(item);
     }
-    this.nativeView.setCurrentItem(this.selectedTabIndex);
+    // Commented to avoid listener call after initialization.
+    // this.nativeView.setCurrentItem(this.selectedTabIndex);
   }
 
   [tabsProperty.getDefault](): BottomNavigationTab[] {
@@ -89,17 +95,7 @@ export class BottomNavigation extends BottomNavigationBase {
   }
 
   [titleVisibilityProperty.setNative](value: TitleVisibility) {
-    switch (value) {
-      case 'never':
-        this.nativeView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_HIDE);
-        break;
-      case 'always':
-        this.nativeView.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
-        break;
-      default:
-        this.nativeView.setTitleState(AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE);
-        break;
-    }
+    this.nativeView.setTitleState(this.titleVisibilityOptions[value]);
   }
 
   [activeColorProperty.setNative](activeColor: string) {

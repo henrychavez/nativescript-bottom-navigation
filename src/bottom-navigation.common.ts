@@ -13,6 +13,13 @@ export interface OnTabPressedEventData extends EventData {
 }
 
 /**
+ * Event interface for tab reselected event
+ */
+export interface OnTabReselectedEventData extends EventData {
+  index: number;
+}
+
+/**
  * Event interface for tab selected event
  */
 export interface OnTabSelectedEventData extends EventData {
@@ -21,6 +28,8 @@ export interface OnTabSelectedEventData extends EventData {
 }
 
 export type TitleVisibility = 'always' | 'selected' | 'never';
+
+export type TitleVisibilityOptions = { [k in TitleVisibility]: any };
 
 export abstract class BottomNavigationBase extends View implements AddChildFromBuilder {
 
@@ -60,6 +69,8 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
    */
   public keyLineColor: string = '#eeeeee';
 
+  protected abstract titleVisibilityOptions: TitleVisibilityOptions;
+
   /**
    * Method allowing to manually select a tab
    */
@@ -73,15 +84,16 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
     let eventData: OnTabPressedEventData = {
       eventName: 'tabPressed',
       object: this,
-      index: index
+      index,
     };
     this.notify(eventData);
   }
 
-  public onTabReselected() {
-    let eventData: EventData = {
+  public onTabReselected(index: number) {
+    let eventData: OnTabReselectedEventData = {
       eventName: 'tabReselected',
-      object: this
+      object: this,
+      index,
     };
     this.notify(eventData);
   }
@@ -97,12 +109,12 @@ export abstract class BottomNavigationBase extends View implements AddChildFromB
     this.notify(eventData);
   }
 
-  _addChildFromBuilder(name: string, value: any): void {
+  _addChildFromBuilder(name: string, value: BottomNavigationTabBase): void {
     if (name === 'BottomNavigationTab') {
       if (!this.tabs) {
-        this.tabs = <BottomNavigationTabBase[]>[];
+        this.tabs = [];
       }
-      this.tabs.push(<BottomNavigationTabBase>value);
+      this.tabs.push(value);
     }
   }
 

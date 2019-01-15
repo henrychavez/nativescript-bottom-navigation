@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BottomNavigationTab, BottomNavigation, OnTabPressedEventData, OnTabSelectedEventData } from "nativescript-bottom-navigation";
+import {
+  BottomNavigationTab,
+  BottomNavigation,
+  OnTabPressedEventData,
+  OnTabSelectedEventData,
+  OnTabReselectedEventData
+} from "nativescript-bottom-navigation";
 import { Page } from "tns-core-modules/ui/page";
 
 @Component({
@@ -33,6 +39,11 @@ export class TabsComponent implements OnInit {
   onBottomNavigationTabSelected(args: OnTabSelectedEventData): void {
     console.log(`old tab index:  ${args.oldIndex}`);
     console.log(`selected tab index:  ${args.newIndex}`);
+  }
+
+  onBottomNavigationTabReselected(args: OnTabReselectedEventData): void {
+    alert('Tab Reselected');
+    console.log(`reselected tab index:  ${args.index}`);
   }
 
 }

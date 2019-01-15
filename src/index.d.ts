@@ -5,6 +5,10 @@ export declare interface OnTabPressedEventData extends EventData {
   index: number;
 }
 
+export declare interface OnTabReselectedEventData extends EventData {
+  index: number;
+}
+
 export declare interface OnTabSelectedEventData extends EventData {
   oldIndex: number;
   newIndex: number;

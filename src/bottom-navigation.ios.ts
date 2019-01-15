@@ -10,8 +10,9 @@ import {
   tabsProperty,
   keyLineColorProperty,
   keyLineColorCssProperty,
+  TitleVisibility,
+  TitleVisibilityOptions,
   titleVisibilityProperty,
-  TitleVisibility
 } from './bottom-navigation.common';
 import { Color } from 'tns-core-modules/color';
 import { fromResource } from 'tns-core-modules/image-source';
@@ -45,10 +46,11 @@ export class BottomNavigationDelegate extends NSObject {
   public bottomNavigationBarDidSelectItem(navigationBar: MDCBottomNavigationBar, item: UITabBarItem) {
     const bottomNavigation: BottomNavigation = this._owner.get();
     if (bottomNavigation.selectedTabIndex === item.tag) {
-      bottomNavigation.onTabReselected();
-    } else {
-      bottomNavigation.onTabSelected(item.tag);
+      bottomNavigation.onTabReselected(item.tag);
+      return;
     }
+
+    bottomNavigation.onTabSelected(item.tag);
   }
 
   public bottomNavigationBarShouldSelectItem(bottomNavigationBar: MDCBottomNavigationBar, item: UITabBarItem): boolean {
@@ -63,6 +65,11 @@ export class BottomNavigationDelegate extends NSObject {
 }
 
 export class BottomNavigation extends BottomNavigationBase {
+  protected titleVisibilityOptions: TitleVisibilityOptions = {
+    never: MDCBottomNavigationBarTitleVisibilityNever,
+    always: MDCBottomNavigationBarTitleVisibilityAlways,
+    selected: MDCBottomNavigationBarTitleVisibilitySelected,
+  };
 
   private _delegate: BottomNavigationDelegate;
 
@@ -139,17 +146,7 @@ export class BottomNavigation extends BottomNavigationBase {
   }
 
   [titleVisibilityProperty.setNative](value: TitleVisibility) {
-    switch (value) {
-      case 'never':
-        this.nativeView.titleVisibility = MDCBottomNavigationBarTitleVisibilityNever;
-        break;
-      case 'always':
-        this.nativeView.titleVisibility = MDCBottomNavigationBarTitleVisibilityAlways;
-        break;
-      default:
-        this.nativeView.titleVisibility = MDCBottomNavigationBarTitleVisibilitySelected;
-        break;
-    }
+    this.nativeView.titleVisibility = this.titleVisibilityOptions[value];
   }
 
   [activeColorProperty.setNative](activeColor: string) {
