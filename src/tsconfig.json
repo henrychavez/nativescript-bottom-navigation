@@ -2,7 +2,10 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "lib": ["es6", "dom"],
+        "lib": [
+            "es6",
+            "dom"
+        ],
         "baseUrl": ".",
         "removeComments": true,
         "noLib": false,
@@ -11,6 +14,10 @@
         "pretty": true,
         "noEmitHelpers": true
     },
+    "include": [
+        "**/*.ts",
+        "!*.d.ts"
+    ],
     "exclude": [
         "node_modules",
         "platforms",
@@ -18,9 +25,6 @@
     ],
     "compileOnSave": false,
     "angularCompilerOptions": {
-        "annotateForClosureCompiler": true,
-        "strictMetadataEmit": true,
-        "skipTemplateCodegen": true,
-        "genDir": "."
+        "skipTemplateCodegen": true
     }
 }
