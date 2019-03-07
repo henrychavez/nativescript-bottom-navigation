@@ -28,7 +28,6 @@ matrix:
         - cd src && npm run build
         - cd ../demo && npm i && tns build ios --bundle --env.uglify
         - cd ../demo-angular && npm i && tns build ios --bundle --env.uglify
-        - cd ../demo-vue && npm i && tns build ios --bundle --env.uglify
     - language: android
       os: linux
       env:
@@ -39,7 +38,6 @@ matrix:
         - cd src && npm run build 
         - cd ../demo && npm i && tns build android --bundle --env.uglify --env.snapshot
         - cd ../demo-angular && npm i && tns build android --bundle --env.uglify --env.snapshot
-        - cd ../demo-vue && npm i && tns build android --bundle --env.uglify --env.snapshot
     - language: android
       env: 
         - BuildAndroid="28"
