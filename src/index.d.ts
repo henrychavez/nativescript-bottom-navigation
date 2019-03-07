@@ -18,7 +18,7 @@ export declare interface OnTabSelectedEventData extends EventData {
 export type TitleVisibility = 'always' | 'selected' | 'never';
 
 export declare class BottomNavigation extends BottomNavigationBase {
-  
+
   protected titleVisibilityOptions;
 
   readonly android: any;
