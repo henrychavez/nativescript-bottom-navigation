@@ -46,7 +46,6 @@ You can set the tabs using the `tabs` property
                                     activeColor="green"
                                     inactiveColor="red"
                                     backgroundColor="black"
-                                    keyLineColor="black"
                                     loaded="bottomNavigationLoaded"
                                     row="1"></bottomNav:BottomNavigation>
     </GridLayout>
@@ -100,7 +99,6 @@ or you can add the tabs directly in your xml view
         <bottomNav:BottomNavigation activeColor="green"
                                     inactiveColor="red"
                                     backgroundColor="black"
-                                    keyLineColor="black"
                                     loaded="bottomNavigationLoaded"
                                     row="1">
             <bottomNav:BottomNavigationTab title="First" icon="ic_home"></bottomNav:BottomNavigationTab>
@@ -160,7 +158,6 @@ As the examples in the Javascript/Typescript version you can use the `tabs` prop
                       activeColor="red"
                       inactiveColor="yellow"
                       backgroundColor="black"
-                      keyLineColor="black"
                       (tabSelected)="onBottomNavigationTabSelected($event)"
                       (tabPressed)="onBottomNavigationTabPressed($event)"
                       row="1"></BottomNavigation>
@@ -177,7 +174,6 @@ or you can declare the BottomNavigationTabs in your html directly
     <BottomNavigation activeColor="red"
                       inactiveColor="yellow"
                       backgroundColor="black"
-                      keyLineColor="black"
                       (tabSelected)="onBottomNavigationTabSelected($event)"
                       (tabPressed)="onBottomNavigationTabPressed($event)"
                       row="1">
@@ -219,14 +215,15 @@ export class AppComponent {
 
 #### Vue
 
-If you want to use this plugin with Vue, the only thing you have to do is register de element in your `app.js` or `main.js` as I'll show you below:
+If you want to use this plugin with Vue, do this in your `app.js` or `main.js`:
 
 ```javascript
-Vue.registerElement('BottomNavigation', () => require('nativescript-bottom-navigation').BottomNavigation);
-Vue.registerElement('BottomNavigationTab', () => require('nativescript-bottom-navigation').BottomNavigationTab);
+import BottomNavigation from 'nativescript-bottom-navigation/vue';
+
+Vue.use(BottomNavigation)
 ```
 
-This will register `BottomNavigation` and `BottomNavigationTab` to your `Vue` instance and now you can use the plugin as follows:
+This will install and register `BottomNavigation` and `BottomNavigationTab` components to your `Vue` instance and now you can use the plugin as follows:
 
 ```xml
 <GridLayout rows="*, auto">
@@ -236,7 +233,6 @@ This will register `BottomNavigation` and `BottomNavigationTab` to your `Vue` in
     <BottomNavigation activeColor="red"
                       inactiveColor="yellow"
                       backgroundColor="black"
-                      keyLineColor="black"
                       @tabSelected="onBottomNavigationTabSelected"
                       row="1">
         <BottomNavigationTab title="First" icon="ic_home" />
@@ -276,7 +272,7 @@ You can also use your css file to set or change the activeColor, inactiveColor &
 | Property | Required | Default | Type | Description |
 | --- | --- | --- | --- | --- |
 | tabs | true | null | `Array<BottomNavigationTab>` | Array containing the tabs for the BottomNavigation |
-| titleVisibility | false | "selected" | `"selected" | "always" | "never"` | Title Visibility of each BottomNavigationTab  |
+| titleVisibility | false | "selected" | `"selected" | "always" | "never"` | Title Visibility for each BottomNavigationTab  |
 | activeColor | false | "blue" | `String` | Color of the BottomNavigationTab when it's selected  |
 | inactiveColor | false | "gray" | `String` | Color of the BottomNavigationTab when it's not selected  |
 | backgroundColor | false | "white" | `String` | Color of the BottomNavigation background  |
@@ -286,6 +282,7 @@ You can also use your css file to set or change the activeColor, inactiveColor &
 | Property | Required | Default | Type | Description |
 | --- | --- | --- | --- | --- |
 | tabSelected | false | null | `function ($event: OnTabSelectedEventData) {}` | Function fired every time the user select a new tab that receive an event object |
+| tabReselected | false | null | `function ($event: OnTabReselectedEventData) {}` | Function fired every time the user select a tab that is already selected and receive an event object |
 | tabPressed | false | null | `function ($event: OnTabPressedEventData) {}` | Function fired every time the user tap a tab with `selectable: false` that receive an event object |
 
 #### Properties (internal)

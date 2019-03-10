@@ -1,6 +1,6 @@
 {
     "name": "nativescript-bottom-navigation",
-    "version": "1.4.4",
+    "version": "1.5.0",
     "description": "Nativescript plugin to add a bottom navigation component for Android & iOS",
     "main": "bottom-navigation",
     "typings": "index.d.ts",
@@ -50,7 +50,8 @@
         "Henry Chavez",
         "Bytpher",
         "Bottom Navigation",
-        "Material Design"
+        "Material Design",
+        "Tab Navigation"
     ],
     "author": {
         "name": "Henry Chavez",
