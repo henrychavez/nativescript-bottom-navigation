@@ -12,12 +12,14 @@ seed-tests/seed-copy/**/*.*
 seed-tests/seed-copy-new-git-repo/**/*.*
 demo/*.d.ts
 demo-angular/*.d.ts
+!demo-vue/app/app.js
 !demo/references.d.ts
 !demo-angular/references.d.ts
 demo/lib
 demo-angular/lib
 demo/platforms
 demo-angular/platforms
+demo-vue/platforms
 node_modules
 publish/src
 publish/package
