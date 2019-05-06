@@ -6,6 +6,7 @@
             "es6",
             "dom"
         ],
+        "declaration": true,
         "baseUrl": ".",
         "removeComments": true,
         "noLib": false,

@@ -183,6 +183,7 @@ export class BottomNavigation extends BottomNavigationBase {
 
   protected selectTabNative(index: number): void {
     this.nativeView.selectedItem = this.nativeView.items[index];
+    this.selectedTabIndex = index;
   }
 
 }
