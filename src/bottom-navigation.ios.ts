@@ -125,12 +125,15 @@ export class BottomNavigation extends BottomNavigationBase {
   }
 
   createTabs(tabs: BottomNavigationTab[]) {
-    if (!this.tabs) { this.tabs = tabs; }
-    const toUITabBarItem = (tab: BottomNavigationTab, tag: number) => UITabBarItem.alloc().initWithTitleImageTag(tab.title, fromResource(tab.icon).ios, tag);
-    const bottomNavigationTabs: UITabBarItem[] = tabs.map(toUITabBarItem);
+    if (!this.tabs) {
+      this.tabs = tabs;
+    } else {
+      const toUITabBarItem = (tab: BottomNavigationTab, tag: number) => UITabBarItem.alloc().initWithTitleImageTag(tab.title, fromResource(tab.icon).ios, tag);
+      const bottomNavigationTabs: UITabBarItem[] = tabs.map(toUITabBarItem);
 
-    this.nativeView.items = bottomNavigationTabs;
-    this.nativeView.selectedItem = bottomNavigationTabs[this.selectedTabIndex];
+      this.nativeView.items = bottomNavigationTabs;
+      this.nativeView.selectedItem = bottomNavigationTabs[this.selectedTabIndex];
+    }
   }
 
   [tabsProperty.getDefault](): BottomNavigationTab[] {
