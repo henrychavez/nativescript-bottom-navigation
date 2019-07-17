@@ -75,11 +75,11 @@ export class BottomNavigation extends BottomNavigationBase {
     if (!this.tabs) {
       this.tabs = tabs;
     } else {
-        for (let tab of tabs) {
-          let icon = new BitmapDrawable(fromResource(tab.icon).android);
-          let item = new AHBottomNavigationItem(tab.title, icon, new Color('white').android);
-          this.nativeView.addItem(item);
-        }
+      for (let tab of tabs) {
+        let icon = new BitmapDrawable(fromResource(tab.icon).android);
+        let item = new AHBottomNavigationItem(tab.title, icon, new Color('white').android);
+        this.nativeView.addItem(item);
+      }
     }
     // Commented to avoid listener call after initialization.
     // this.nativeView.setCurrentItem(this.selectedTabIndex);
