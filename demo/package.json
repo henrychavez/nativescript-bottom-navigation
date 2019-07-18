@@ -2,28 +2,19 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-android": {
-      "version": "5.3.0-2019-03-19-143503-02"
+      "version": "5.4.0"
     },
     "tns-ios": {
-      "version": "5.1.0"
+      "version": "5.4.2"
     }
   },
-  "main": "app.js",
-  "scripts": {
-    "build.plugin": "cd ../src && npm run build",
-    "ci.tslint": "npm i && tslint --config '../tslint.json' 'app/**/*.ts' --exclude '**/node_modules/**'",
-    "ci.android.build": "cd ../src && npm run build && cd ../demo && tns build android",
-    "ci.ios.build": "cd ../src && npm run build.iosOnly && cd ../demo && tns build ios",
-    "generate-android-snapshot": "generate-android-snapshot --targetArchs arm,arm64,ia32 --install"
-  },
   "dependencies": {
-    "nativescript-bottom-navigation": "file:../src",
+    "nativescript-test": "file:../src",
     "nativescript-theme-core": "~1.0.4",
-    "tns-core-modules": "androidx"
+    "tns-core-modules": "~5.4.0"
   },
   "devDependencies": {
-    "nativescript-dev-typescript": "^0.8.0",
-    "nativescript-dev-webpack": "~0.18.0",
-    "tslint": "~5.11.0"
+    "nativescript-dev-typescript": "~0.10.0",
+    "nativescript-dev-webpack": "~0.24.0"
   }
 }

@@ -1,9 +1,9 @@
 *.map
-*.log
 *.ts
 !*.d.ts
 tsconfig.json
-hooks
-/platforms/android/**/*
+scripts/*
+platforms/android/*
 !platforms/android/include.gradle
-!platforms/android/nativescript_bottom_navigation.aar
+!platforms/android/*.aar
+!platforms/android/*.jar

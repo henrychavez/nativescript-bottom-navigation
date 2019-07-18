@@ -1,46 +1,36 @@
 {
   "nativescript": {
     "id": "org.nativescript.angular",
-    "tns-ios": {
-      "version": "5.2.0"
-    },
     "tns-android": {
-      "version": "5.3.0-2019-03-19-143503-02"
+      "version": "5.4.0"
+    },
+    "tns-ios": {
+      "version": "5.4.2"
     }
   },
-  "scripts": {
-    "build.plugin": "cd ../src && npm run build",
-    "ci.tslint": "npm i && tslint --config '../tslint.json' 'app/**/*.ts' --exclude '**/node_modules/**'",
-    "ci.android.build": "cd ../src && npm run build && cd ../demo-angular && tns build android",
-    "ci.ios.build": "cd ../src && npm run build.iosOnly && cd ../demo-angular && tns build ios",
-    "generate-android-snapshot": "generate-android-snapshot --targetArchs arm,arm64,ia32 --install"
-  },
   "dependencies": {
-    "@angular/animations": "~7.0.0",
-    "@angular/common": "~7.0.0",
-    "@angular/compiler": "~7.0.0",
-    "@angular/core": "~7.0.0",
-    "@angular/forms": "~7.0.0",
-    "@angular/http": "~7.0.0",
-    "@angular/platform-browser": "~7.0.0",
-    "@angular/platform-browser-dynamic": "~7.0.0",
-    "@angular/router": "~7.0.0",
-    "nativescript-angular": "~7.0.0",
+    "@angular/animations": "~8.0.0",
+    "@angular/common": "~8.0.0",
+    "@angular/compiler": "~8.0.0",
+    "@angular/core": "~8.0.0",
+    "@angular/forms": "~8.0.0",
+    "@angular/http": "~8.0.0-beta.10",
+    "@angular/platform-browser": "~8.0.0",
+    "@angular/platform-browser-dynamic": "~8.0.0",
+    "@angular/router": "~8.0.0",
+    "nativescript-angular": "~8.0.0",
     "nativescript-bottom-navigation": "file:../src",
+    "nativescript-test": "file:../src",
     "nativescript-theme-core": "~1.0.4",
-    "reflect-metadata": "~0.1.10",
-    "rxjs": "~6.3.0",
-    "tns-core-modules": "androidx",
-    "zone.js": "^0.8.4"
+    "reflect-metadata": "~0.1.12",
+    "rxjs": "~6.5.0",
+    "tns-core-modules": "~5.4.0",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "~7.0.0",
-    "@nativescript/schematics": "~0.4.0",
-    "@ngtools/webpack": "~7.0.0",
-    "codelyzer": "~4.5.0",
-    "nativescript-dev-sass": "~1.6.0",
-    "nativescript-dev-typescript": "^0.8.0",
-    "nativescript-dev-webpack": "~0.18.0",
-    "tslint": "~5.11.0"
+    "@angular/compiler-cli": "~8.0.0",
+    "@ngtools/webpack": "~8.0.0",
+    "nativescript-dev-typescript": "~0.10.0",
+    "nativescript-dev-webpack": "~0.24.0"
   }
 }
