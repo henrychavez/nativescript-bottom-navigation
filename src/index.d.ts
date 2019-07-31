@@ -1,38 +1,28 @@
-import { EventData } from 'tns-core-modules/data/observable';
-import { AddChildFromBuilder, View } from 'tns-core-modules/ui/core/view';
-import { BottomNavigationBase, BottomNavigationTabBase } from './bottom-navigation.common';
+import { BottomNavigationBase } from './lib/base/bottom-navigation.base';
+import { BottomNavigationTabBase } from './lib/base/bottom-navigation-tab.base';
 
-export declare interface OnTabPressedEventData extends EventData {
-  index: number;
-}
-
-export declare interface OnTabReselectedEventData extends EventData {
-  index: number;
-}
-
-export declare interface OnTabSelectedEventData extends EventData {
-  oldIndex: number;
-  newIndex: number;
-}
-
-export type TitleVisibility = 'always' | 'selected' | 'never';
+export {
+  TabSelectedEventData,
+  TabPressedEventData,
+  TabReselectedEventData,
+  TitleVisibility,
+  TabEvent,
+} from './lib/internal/internals';
 
 export declare class BottomNavigation extends BottomNavigationBase {
-
-  protected titleVisibilityOptions;
-
-  readonly android: any;
+  selectedTabIndex: number;
+  titleVisibility: TitleVisibility;
+  activeColor: string;
+  inactiveColor: string;
+  backgroundColor: string;
+  public selectTab(index: number): void;
   readonly ios: any;
-
-  private _delegate;
-
-  constructor();
-
-  public createTabs(tabs: BottomNavigationTab[]): void;
-
-  protected selectTabNative(index: number): void;
+  readonly android: any;
+  readonly items: BottomNavigationTab[];
 }
 
 export declare class BottomNavigationTab extends BottomNavigationTabBase {
-  constructor(title: string, icon: string, selectable?: boolean, parent?: WeakRef<BottomNavigationBase>);
+  title: string;
+  icon: string;
+  isSelectable: boolean;
 }

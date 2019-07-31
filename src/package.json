@@ -1,7 +1,7 @@
 {
   "name": "nativescript-bottom-navigation",
   "version": "1.5.0",
-  "description": "Nativescript plugin to add a bottom navigation component for Android & iOS",
+  "description": "NativeScript plugin to add a bottom navigation component for Android & iOS",
   "main": "bottom-navigation",
   "typings": "index.d.ts",
   "nativescript": {
@@ -12,17 +12,19 @@
   },
   "scripts": {
     "tsc": "npm i && tsc",
+    "ngc.clean": "find ./ angular/ -name '*.metadata.json' -delete",
+    "ngc": "npm run ngc.clean && node --max-old-space-size=8192 node_modules/.bin/ngc",
     "build": "npm run tsc && npm run build.native",
     "build.native": "node scripts/build-native.js",
     "postclone": "npm i && node scripts/postclone.js",
     "tslint": "cd .. && tslint \"**/*.ts\" --config tslint.json --exclude \"**/node_modules/**\"",
     "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/platforms/**'",
     "prepack": "npm run build.native",
-    "demo.ios": "npm run tsc && cd ../demo && tns run ios --emulator",
-    "demo.android": "npm run tsc && cd ../demo && tns run android --emulator",
+    "demo.ios": "npm run tsc && cd ../demo && tns run ios",
+    "demo.android": "npm run tsc && cd ../demo && tns run android",
     "demo.reset": "cd ../demo && npx rimraf -- hooks node_modules platforms package-lock.json",
-    "demo-angular.ios": "npm run tsc && cd ../demo-angular && tns run ios --emulator",
-    "demo-angular.android": "npm run tsc && cd ../demo-angular && tns run android --emulator",
+    "demo-angular.ios": "npm run tsc && cd ../demo-angular && tns run ios",
+    "demo-angular.android": "npm run tsc && cd ../demo-angular && tns run android",
     "demo-angular.reset": "cd ../demo-angular && npx rimraf -- hooks node_modules platforms package-lock.json",
     "plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-test && tns plugin add ../src && cd ../demo-angular && tns plugin remove nativescript-test && tns plugin add ../src",
     "clean": "npm run demo.reset && npm run demo-angular.reset && npx rimraf -- node_modules package-lock.json && npm i"

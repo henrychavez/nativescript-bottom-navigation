@@ -1,0 +1,8 @@
+use_frameworks!
+
+target "demoangular" do
+# Begin Podfile - /Users/henrychavez/Projects/Plugins/nativescript-bottom-navigation/demo-angular/node_modules/nativescript-bottom-navigation/platforms/ios/Podfile
+pod 'MaterialComponents/BottomNavigation'
+
+# End Podfile
+end

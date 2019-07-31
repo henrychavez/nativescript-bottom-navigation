@@ -2,16 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "declaration": true,
+    "declaration": false,
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "lib": [
-      "es6",
-      "dom"
-    ],
+    "lib": ["es6", "dom"],
     "sourceMap": true,
     "pretty": true,
     "allowUnreachableCode": false,
@@ -23,8 +20,9 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "compileOnSave": false
+  "exclude": ["node_modules"],
+  "compileOnSave": false,
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true
+  }
 }

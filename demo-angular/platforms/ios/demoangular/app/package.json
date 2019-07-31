@@ -1,0 +1,6 @@
+{
+    "main": "bundle",
+    "android": {
+        "v8Flags": "--expose_gc"
+    }
+}
