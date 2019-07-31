@@ -1,3 +1,0 @@
-#include "../internal/nativescript-build.xcconfig"
-CLANG_ENABLE_MODULES = NO;
-CLANG_MODULES_AUTOLINK = NO;

@@ -24,3 +24,10 @@ publish/package
 demo/report/report.html
 demo/report/stats.json
 !demo-vue/app/app.js
+
+!demo-angular/karma.conf.js
+!demo-angular/app/tests/*.js
+demo-angular/*.d.ts
+!demo-angular/references.d.ts
+demo-angular/lib
+demo-angular/platforms
