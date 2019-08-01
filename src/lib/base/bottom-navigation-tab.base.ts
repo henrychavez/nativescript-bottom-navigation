@@ -3,7 +3,12 @@ import {
   Property,
   booleanConverter,
 } from 'tns-core-modules/ui/core/view';
-import { ImageSource, fromFileOrResource } from 'tns-core-modules/image-source';
+import {
+  ImageSource,
+  fromFileOrResource,
+  fromResource,
+  fromFile,
+} from 'tns-core-modules/image-source';
 
 interface BottomNavigationTabProps {
   title: string;
@@ -22,7 +27,7 @@ export abstract class BottomNavigationTabBase extends View
     if (!args) {
       return;
     }
-
+    console.log('tab args', args);
     for (const k in args) {
       if (args.hasOwnProperty(k)) {
         this[k] = args[k];

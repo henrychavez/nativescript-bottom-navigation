@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {
   BottomNavigationTab,
   BottomNavigation,
   TabPressedEventData,
   TabSelectedEventData,
   TabReselectedEventData,
+  TitleVisibility,
 } from 'nativescript-bottom-navigation';
 import { Page } from 'tns-core-modules/ui/page';
 
@@ -15,32 +16,29 @@ import { Page } from 'tns-core-modules/ui/page';
   styleUrls: ['./tabs.component.css'],
 })
 export class TabsComponent implements OnInit {
-  public selectedTab: number = 0;
-  public tabs: BottomNavigationTab[] = [
-    new BottomNavigationTab({ title: 'First', icon: 'res://ic_home' }),
-    new BottomNavigationTab({
-      title: 'List',
-      icon: 'res://ic_view_list',
-      isSelectable: false,
-    }),
-    new BottomNavigationTab({
-      title: 'List',
-      icon: 'res://ic_view_list',
-    }),
-    new BottomNavigationTab({ title: 'Third', icon: 'res://ic_menu' }),
-  ];
+  // public tabs: BottomNavigationTab[] = [
+  //   new BottomNavigationTab({ title: 'First', icon: 'res://ic_home' }),
+  //   new BottomNavigationTab({
+  //     title: 'List',
+  //     icon: 'res://ic_view_list',
+  //     isSelectable: false,
+  //   }),
+  //   new BottomNavigationTab({
+  //     title: 'List',
+  //     icon: 'res://ic_view_list',
+  //   }),
+  //   new BottomNavigationTab({ title: 'Third', icon: 'res://ic_menu' }),
+  // ];
 
-  private _bottomNavigation: BottomNavigation;
-
-  constructor(private page: Page) {}
+  @ViewChild('bottomNavigation', { read: ElementRef, static: false })
+  _bottomNavigation: ElementRef<BottomNavigation>;
 
   ngOnInit(): void {
-    this._bottomNavigation = this.page.getViewById('bottomNavigation');
     setTimeout(() => {
-      console.log('printing tabs readonly', this._bottomNavigation.items);
-
-      const badge = this._bottomNavigation['showBadge'](0);
-      badge.setNumber(2);
+      const bottomNavigation = this._bottomNavigation.nativeElement;
+      console.log('printing items readonly', bottomNavigation.items);
+      bottomNavigation.titleVisibility = TitleVisibility.Always;
+      bottomNavigation.selectTab(2);
     }, 3000);
   }
 

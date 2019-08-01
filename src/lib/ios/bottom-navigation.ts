@@ -32,12 +32,14 @@ export class BottomNavigation extends BottomNavigationBase {
 
   createNativeView(): Object {
     this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
-    this.nativeView = MDCBottomNavigationBar.new();
+    this.nativeView = MDCBottomNavigationBar.alloc().init();
 
     return this.nativeView;
   }
 
   initNativeView(): void {
+    this.createTabs();
+
     this.nativeView.selectedItemTintColor = this.activeColor.ios;
     this.nativeView.unselectedItemTintColor = this.inactiveColor.ios;
   }
@@ -104,7 +106,7 @@ export class BottomNavigation extends BottomNavigationBase {
     this.nativeView.barTintColor = backgroundColor.ios;
   }
 
-  protected createTabs(tabs: BottomNavigationTab[]) {
+  protected createTabs(tabs?: BottomNavigationTab[]) {
     if (!this._items) {
       this._items = tabs;
     }

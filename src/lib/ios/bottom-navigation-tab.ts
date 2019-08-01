@@ -1,7 +1,8 @@
 import { BottomNavigationTabBase } from '../base/bottom-navigation-tab.base';
+import { ImageSource } from 'tns-core-modules/image-source/image-source';
 
 export class BottomNavigationTab extends BottomNavigationTabBase {
   getNativeIcon(): UIImage {
-    throw new Error('Method not implemented.');
+    return (this.icon as ImageSource).ios;
   }
 }

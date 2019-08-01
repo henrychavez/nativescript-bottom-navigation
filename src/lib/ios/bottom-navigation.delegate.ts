@@ -1,8 +1,8 @@
 import { BottomNavigation } from './bottom-navigation';
 
-declare type MDCBottomNavigationBar = any;
+type MDCBottomNavigationBar = any;
 
-declare class MDCBottomNavigationBarDelegate {}
+export declare class MDCBottomNavigationBarDelegate {}
 
 export class BottomNavigationDelegate extends NSObject {
   static ObjCProtocols = [MDCBottomNavigationBarDelegate];

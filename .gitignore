@@ -5,6 +5,8 @@
 *.js
 *.js.map
 *.log
+*.metadata.json
+package-lock.json
 src/*.d.ts
 !src/index.d.ts
 !src/references.d.ts

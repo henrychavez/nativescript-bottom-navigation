@@ -1,20 +1,22 @@
 <ActionBar title="My App" class="action-bar"></ActionBar>
 <GridLayout rows="*, auto, auto">
-  <StackLayout class="page" [ngSwitch]="selectedTab" row="0">
+  <StackLayout
+    class="page"
+    [ngSwitch]="bottomNavigation.selectedTabIndex"
+    row="0"
+  >
     <ItemsComponent *ngSwitchDefault></ItemsComponent>
     <SecondItemComponent *ngSwitchCase="2"></SecondItemComponent>
   </StackLayout>
 
   <BottomNavigation
-    id="bottomNavigation"
+    #bottomNavigation
     row="1"
-    [tabs]="tabs"
-    titleVisibility="Never"
     (tabPressed)="onBottomNavigationTabPressed($event)"
     (tabSelected)="onBottomNavigationTabSelected($event)"
     (tabReselected)="onBottomNavigationTabReselected($event)"
   >
-    <!-- <BottomNavigationTab
+    <BottomNavigationTab
       title="First"
       icon="res://ic_home"
     ></BottomNavigationTab>
@@ -26,6 +28,6 @@
     <BottomNavigationTab
       title="Third"
       icon="res://ic_menu"
-    ></BottomNavigationTab> -->
+    ></BottomNavigationTab>
   </BottomNavigation>
 </GridLayout>
