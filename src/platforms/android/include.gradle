@@ -2,5 +2,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    def materialVersion =  project.hasProperty("materialVersion") ? project.materialVersion : "1.1.0-alpha07"
+    implementation "com.google.android.material:material:$materialVersion"
 }

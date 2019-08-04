@@ -68,9 +68,11 @@ export abstract class BottomNavigationBase extends View
    * Method allowing to manually select a tab
    */
   selectTab(index: number): void {
-    if (index !== this.selectedTabIndex) {
-      this.selectTabNative(index);
+    if (index === this.selectedTabIndex) {
+      return;
     }
+
+    this.selectTabNative(index);
   }
 
   _emitTabPressed(index: number) {
@@ -80,6 +82,7 @@ export abstract class BottomNavigationBase extends View
       index,
     };
     this.notify(eventData);
+    this.removeBadge(index);
   }
 
   _emitTabReselected(index: number) {
@@ -100,6 +103,7 @@ export abstract class BottomNavigationBase extends View
     };
     this.selectedTabIndex = index;
     this.notify(eventData);
+    this.removeBadge(index);
   }
 
   _addChildFromBuilder(name: string, value: BottomNavigationTabBase): void {
@@ -111,6 +115,8 @@ export abstract class BottomNavigationBase extends View
     }
   }
 
+  abstract showBadge(index: number, value?: number): void;
+  abstract removeBadge(index: number): void;
   protected abstract selectTabNative(index: number): void;
   protected abstract createTabs(tabs: BottomNavigationTabBase[]): void;
 }

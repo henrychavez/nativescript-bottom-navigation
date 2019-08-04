@@ -1,5 +1,4 @@
 import { Color } from 'tns-core-modules/color/color';
-import { backgroundColorProperty } from 'tns-core-modules/ui/core/view';
 
 import {
   BottomNavigationBase,
@@ -53,6 +52,17 @@ export class BottomNavigation extends BottomNavigationBase {
     this.setInactiveColor(this.style.inactiveColor);
   }
 
+  showBadge(index: number, value?: number): void {
+    const badge = this.nativeView.showBadge(index);
+    if (value) {
+      badge.setNumber(value);
+    }
+  }
+
+  removeBadge(index: number): void {
+    this.nativeView.removeBadge(index);
+  }
+
   [tabsProperty.setNative](tabs: BottomNavigationTab[]) {
     this.createTabs(tabs);
   }
@@ -67,10 +77,6 @@ export class BottomNavigation extends BottomNavigationBase {
 
   [inactiveColorCssProperty.setNative](inactiveColor: Color) {
     this.setInactiveColor(inactiveColor);
-  }
-
-  [backgroundColorProperty.setNative](backgroundColor: Color) {
-    this.nativeView.setBackgroundColor(backgroundColor.android);
   }
 
   protected createTabs(tabs?: BottomNavigationTab[]) {

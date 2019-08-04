@@ -18,12 +18,9 @@ import { TitleVisibility } from '../internal/internals';
 import { BottomNavigationTab } from './bottom-navigation-tab';
 import { BottomNavigationDelegate } from './bottom-navigation.delegate';
 
-declare const MDCBottomNavigationBar: any;
-
-declare type MDCBottomNavigationBar = any;
-
 export class BottomNavigation extends BottomNavigationBase {
-  protected _items: BottomNavigationTab[];
+  nativeView: MDCBottomNavigationBar;
+
   private _delegate: BottomNavigationDelegate;
 
   get ios(): MDCBottomNavigationBar {
@@ -86,11 +83,24 @@ export class BottomNavigation extends BottomNavigationBase {
     (this as any)._setNativeViewFrame(nativeView, frame);
   }
 
+  showBadge(index: number, value?: number): void {
+    const tabBarItem = this.nativeView.items[index];
+
+    tabBarItem.badgeValue = value ? `${value}` : '';
+  }
+
+  removeBadge(index: number): void {
+    const tabBarItem = this.nativeView.items[index];
+    tabBarItem.badgeValue = null;
+  }
+
   [tabsProperty.setNative](tabs: BottomNavigationTab[]) {
     this.createTabs(tabs);
   }
 
-  [titleVisibilityProperty.setNative](titleVisibility: TitleVisibility) {
+  [titleVisibilityProperty.setNative](
+    titleVisibility: MDCBottomNavigationBarTitleVisibility,
+  ) {
     this.nativeView.titleVisibility = titleVisibility;
   }
 
@@ -110,7 +120,8 @@ export class BottomNavigation extends BottomNavigationBase {
     if (!this._items) {
       this._items = tabs;
     }
-    const bottomNavigationTabs: UITabBarItem[] = this._items.map((tab, index) =>
+
+    const bottomNavigationTabs = this._items.map((tab, index) =>
       UITabBarItem.alloc().initWithTitleImageTag(
         tab.title,
         tab.getNativeIcon(),
@@ -118,7 +129,7 @@ export class BottomNavigation extends BottomNavigationBase {
       ),
     );
 
-    this.nativeView.items = bottomNavigationTabs;
+    this.nativeView.items = new NSArray({ array: bottomNavigationTabs });
     this.nativeView.selectedItem = bottomNavigationTabs[this.selectedTabIndex];
   }
 

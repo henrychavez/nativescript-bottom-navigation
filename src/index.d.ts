@@ -14,8 +14,10 @@ export declare class BottomNavigation extends BottomNavigationBase {
   titleVisibility: TitleVisibility;
   activeColor: string;
   inactiveColor: string;
-  backgroundColor: string;
-  public selectTab(index: number): void;
+  backgroundColor: Color;
+  selectTab(index: number): void;
+  showBadge(index: number, value?: number): void;
+  removeBadge(index: number): void;
   readonly ios: any;
   readonly android: any;
   readonly items: BottomNavigationTab[];

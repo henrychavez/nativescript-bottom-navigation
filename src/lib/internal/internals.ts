@@ -40,7 +40,7 @@ export enum TabEvent {
 }
 
 export enum TitleVisibility {
-  Selected,
-  Always,
-  Never,
+  Selected = 0,
+  Always = 1,
+  Never = 2,
 }
