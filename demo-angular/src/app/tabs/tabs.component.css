@@ -1,3 +1,5 @@
-.customTab {
-  active-color: red;
+.custom-bottom-navigation-bar {
+  active-color: white;
+  background-color: #fd485a;
+  inactive-color: #fc99a2;
 }

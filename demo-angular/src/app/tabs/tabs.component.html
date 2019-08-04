@@ -1,17 +1,18 @@
-<ActionBar title="My App" class="action-bar"></ActionBar>
-<GridLayout rows="*, auto, auto">
+<ActionBar title="Demo" class="action-bar"></ActionBar>
+<GridLayout rows="*, auto">
   <StackLayout
     class="page"
     [ngSwitch]="bottomNavigation.selectedTabIndex"
     row="0"
   >
-    <ItemsComponent *ngSwitchDefault></ItemsComponent>
-    <SecondItemComponent *ngSwitchCase="2"></SecondItemComponent>
+    <ns-first-tab *ngSwitchDefault></ns-first-tab>
+    <ns-third-tab *ngSwitchCase="2"></ns-third-tab>
   </StackLayout>
 
   <BottomNavigation
     #bottomNavigation
     row="1"
+    class="custom-bottom-navigation-bar"
     (tabPressed)="onBottomNavigationTabPressed($event)"
     (tabSelected)="onBottomNavigationTabSelected($event)"
     (tabReselected)="onBottomNavigationTabReselected($event)"

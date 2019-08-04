@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.angular",
+    "id": "org.nativescript.demo.angular",
     "tns-android": {
       "version": "6.0.0"
     },
