@@ -5,22 +5,19 @@
     </ActionBar>
 
     <GridLayout rows="*, auto">
-      <StackLayout row="0">
-        <Label text="content"></Label>
-        <Button text="Go to second tab" @tap="goToSecondTab"></Button>
-      </StackLayout>
+      <GridLayout row="0">
+        <Label class="h1 text-center" text="bottom-navigation-bar"></Label>
+      </GridLayout>
       <BottomNavigation
-        ref="bottomNavigation"
-        activeColor="red"
-        inactiveColor="yellow"
-        backgroundColor="black"
-        keyLineColor="black"
+        class="custom-bottom-navigation-bar"
+        @tabPressed="onBottomNavigationTabPressed"
         @tabSelected="onBottomNavigationTabSelected"
+        @tabReselected="onBottomNavigationTabReselected"
         row="1"
       >
-        <BottomNavigationTab title="First" icon="ic_home"/>
-        <BottomNavigationTab title="Second" icon="ic_view_list"/>
-        <BottomNavigationTab title="Third" icon="ic_menu"/>
+        <BottomNavigationTab title="First" icon="res://ic_home"/>
+        <BottomNavigationTab title="Second" icon="res://ic_view_list" isSelectable="false"/>
+        <BottomNavigationTab title="Third" icon="res://ic_menu"/>
       </BottomNavigation>
     </GridLayout>
   </Page>
@@ -29,20 +26,25 @@
 <script>
 export default {
   methods: {
-    goToSecondTab: function(args) {
-      const bottomNavigation = this.$refs.bottomNavigation.nativeView;
-      console.log('Bottom', bottomNavigation.nativeView);
-      bottomNavigation.selectTab(1);
+    onBottomNavigationTabPressed: function(args) {
+      alert(
+        'This tab has isSelectable: false, and should be used to perform actions',
+      );
+      console.log(`pressed tab index:  ${args.index}`);
     },
     onBottomNavigationTabSelected: function(args) {
       console.log(`old tab index:  ${args.oldIndex}`);
       console.log(`selected tab index:  ${args.newIndex}`);
-    }
+    },
+    onBottomNavigationTabReselected: function(args) {
+      alert('Tab Reselected');
+      console.log(`reselected tab index:  ${args.index}`);
+    },
   },
   computed: {
     message() {
       return "Blank {N}-Vue app";
-    }
+    },
   }
 };
 </script>
@@ -53,11 +55,10 @@ export default {
 // End custom common variables
 
 // Custom styles
-.fa {
-  color: $accent-dark;
+.custom-bottom-navigation-bar {
+  active-color: white;
+  background-color: #fd485a;
+  inactive-color: #fc99a2;
 }
 
-.info {
-  font-size: 20;
-}
 </style>
