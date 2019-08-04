@@ -30,15 +30,6 @@ export interface TabSelectedEventData extends EventData {
   newIndex: number;
 }
 
-/**
- * Bottom Navigation Events
- */
-export enum TabEvent {
-  Pressed = 'tabPressed',
-  Reselected = 'tabReselected',
-  Selected = 'tabSelected',
-}
-
 export enum TitleVisibility {
   Selected = 0,
   Always = 1,

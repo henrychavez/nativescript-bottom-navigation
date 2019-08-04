@@ -11,7 +11,6 @@ import {
 import {
   TitleVisibility,
   TabPressedEventData,
-  TabEvent,
   TabReselectedEventData,
   TabSelectedEventData,
 } from '../internal/internals';
@@ -21,6 +20,9 @@ import { BottomNavigationTabBase } from './bottom-navigation-tab.base';
 @CSSType('BottomNavigation')
 export abstract class BottomNavigationBase extends View
   implements AddChildFromBuilder {
+  static tabPressedEvent = 'tabPressed';
+  static tabSelectedEvent = 'tabSelected';
+  static tabReselectedEvent = 'tabReselected';
   /**
    * Get or set the Bottom Navigation tabs
    */
@@ -77,7 +79,7 @@ export abstract class BottomNavigationBase extends View
 
   _emitTabPressed(index: number) {
     let eventData: TabPressedEventData = {
-      eventName: TabEvent.Pressed,
+      eventName: BottomNavigationBase.tabPressedEvent,
       object: this,
       index,
     };
@@ -85,18 +87,9 @@ export abstract class BottomNavigationBase extends View
     this.removeBadge(index);
   }
 
-  _emitTabReselected(index: number) {
-    let eventData: TabReselectedEventData = {
-      eventName: TabEvent.Reselected,
-      object: this,
-      index,
-    };
-    this.notify(eventData);
-  }
-
   _emitTabSelected(index: number) {
     let eventData: TabSelectedEventData = {
-      eventName: TabEvent.Selected,
+      eventName: BottomNavigationBase.tabSelectedEvent,
       object: this,
       oldIndex: this.selectedTabIndex,
       newIndex: index,
@@ -104,6 +97,15 @@ export abstract class BottomNavigationBase extends View
     this.selectedTabIndex = index;
     this.notify(eventData);
     this.removeBadge(index);
+  }
+
+  _emitTabReselected(index: number) {
+    let eventData: TabReselectedEventData = {
+      eventName: BottomNavigationBase.tabReselectedEvent,
+      object: this,
+      index,
+    };
+    this.notify(eventData);
   }
 
   _addChildFromBuilder(name: string, value: BottomNavigationTabBase): void {

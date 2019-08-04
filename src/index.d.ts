@@ -1,15 +1,21 @@
 import { BottomNavigationBase } from './lib/base/bottom-navigation.base';
 import { BottomNavigationTabBase } from './lib/base/bottom-navigation-tab.base';
-
-export {
+import {
   TabSelectedEventData,
   TabPressedEventData,
   TabReselectedEventData,
   TitleVisibility,
-  TabEvent,
 } from './lib/internal/internals';
 
+export * from './lib/internal/internals';
+
 export declare class BottomNavigation extends BottomNavigationBase {
+  static tabPressedEvent: string;
+  static tabSelectedEvent: string;
+  static tabReselectedEvent: string;
+  readonly ios: any;
+  readonly android: any;
+  readonly items: BottomNavigationTab[];
   selectedTabIndex: number;
   titleVisibility: TitleVisibility;
   activeColor: string;
@@ -18,9 +24,28 @@ export declare class BottomNavigation extends BottomNavigationBase {
   selectTab(index: number): void;
   showBadge(index: number, value?: number): void;
   removeBadge(index: number): void;
-  readonly ios: any;
-  readonly android: any;
-  readonly items: BottomNavigationTab[];
+  on(
+    event: 'tabPressed',
+    callback: (args: TabPressedEventData) => void,
+    thisArg?: any,
+  ): void;
+  on(
+    event: 'tabSelected',
+    callback: (args: TabSelectedEventData) => void,
+    thisArg?: any,
+  ): void;
+  on(
+    event: 'tabReselected',
+    callback: (args: TabReselectedEventData) => void,
+    thisArg?: any,
+  ): void;
+
+  // Needed when 'on' method is overriden.
+  on(
+    eventNames: string,
+    callback: (data: EventData) => void,
+    thisArg?: any,
+  ): void;
 }
 
 export declare class BottomNavigationTab extends BottomNavigationTabBase {
