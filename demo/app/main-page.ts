@@ -1,37 +1,21 @@
 import {
-  BottomNavigation,
-  OnTabReselectedEventData,
-  OnTabSelectedEventData,
-  OnTabPressedEventData,
+  TabReselectedEventData,
+  TabSelectedEventData,
+  TabPressedEventData,
 } from 'nativescript-bottom-navigation';
 
-let bar: BottomNavigation;
-
-const tabSelected = (args: OnTabSelectedEventData) => {
+export const tabSelected = (args: TabSelectedEventData) => {
   console.log('tab selected:', args.newIndex);
 };
 
-const tabReselected = (args: OnTabReselectedEventData) => {
+export const tabReselected = (args: TabReselectedEventData) => {
   console.log('tab reselected:', args.index);
   alert('tab reselected');
 };
 
-const tabPressed = (args: OnTabPressedEventData) => {
+export const tabPressed = (args: TabPressedEventData) => {
   console.log('tab pressed:', args.index);
-  alert('This item has selectable: false, and should be used to perform actions.');
-};
-
-export const loaded = (args) => {
-  bar = args.object as BottomNavigation;
-  bar.on('tabSelected', tabSelected);
-  bar.on('tabPressed', tabPressed);
-  bar.on('tabReselected', tabReselected);
-};
-
-export const changeBackground = () => {
-  bar.backgroundColor = 'black';
-};
-
-export const selectLastTab = () => {
-  bar.selectTab(bar.tabs.length - 1);
+  alert(
+    'This tab has isSelectable: false, and should be used to perform actions.',
+  );
 };

@@ -1,35 +1,28 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:bottomBar="nativescript-bottom-navigation">
-  <Page.actionBar>
-    <ActionBar title="My App"
-               icon=""
-               class="action-bar"></ActionBar>
-  </Page.actionBar>
-  <GridLayout columns="*"
-              rows="*, auto">
-    <StackLayout class="p-20"
-                 row="0">
-      <Label text="bottom-navigation"
-             class="t-20 text-center c-black"
+      xmlns:mdc="nativescript-bottom-navigation">
+  <GridLayout rows="*, auto">
+    <GridLayout class="p-20">
+      <Label text="bottom-navigation-bar"
+             class="h1 text-center"
              textWrap="true" />
-      <Label text="test"
-             class="t-20 text-center c-black"
-             textWrap="true" />
-      <Button text="Change Background"
-              tap="changeBackground" />
-      <Button text="Select last tab"
-              tap="selectLastTab" />
-    </StackLayout>
-    <bottomBar:BottomNavigation class="bottom-nav"
-                                loaded="loaded"
-                                row="1">
-      <bottomBar:BottomNavigationTab title="First"
-                                     icon="ic_home" />
-      <bottomBar:BottomNavigationTab title="Second"
-                                     icon="ic_view_list"
-                                     selectable="false" />
-      <bottomBar:BottomNavigationTab title="Third"
-                                     icon="ic_menu" />
-    </bottomBar:BottomNavigation>
+    </GridLayout>
+    <mdc:BottomNavigation
+      class="custom-bottom-navigation-bar"
+      tabSelected="tabSelected"
+      tabPressed="tabPressed"
+      tabReselected="tabReselected"
+      row="1"
+    >
+      <mdc:BottomNavigationTab
+        title="First"
+        icon="res://ic_home" />
+      <mdc:BottomNavigationTab
+        title="Second"
+        icon="res://ic_view_list"
+        isSelectable="false" />
+      <mdc:BottomNavigationTab
+        title="Third"
+        icon="res://ic_menu" />
+    </mdc:BottomNavigation>
   </GridLayout>
 </Page>
