@@ -2,17 +2,18 @@
 <GridLayout rows="*, auto">
   <StackLayout
     class="page"
-    [ngSwitch]="bottomNavigation.selectedTabIndex"
+    [ngSwitch]="bottomNavigationBar.selectedTabIndex"
     row="0"
   >
     <ns-first-tab *ngSwitchDefault></ns-first-tab>
     <ns-third-tab *ngSwitchCase="2"></ns-third-tab>
   </StackLayout>
 
-  <BottomNavigation
-    #bottomNavigation
+  <BottomNavigationBar
+    #bottomNavigationBar
     row="1"
     class="custom-bottom-navigation-bar"
+    (loaded)="onbottomNavigationBarLoaded($event)"
     (tabPressed)="onBottomNavigationTabPressed($event)"
     (tabSelected)="onBottomNavigationTabSelected($event)"
     (tabReselected)="onBottomNavigationTabReselected($event)"
@@ -30,5 +31,5 @@
       title="Third"
       icon="res://ic_menu"
     ></BottomNavigationTab>
-  </BottomNavigation>
+  </BottomNavigationBar>
 </GridLayout>

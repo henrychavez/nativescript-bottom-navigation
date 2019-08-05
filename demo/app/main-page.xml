@@ -6,7 +6,7 @@
              class="h1 text-center"
              textWrap="true" />
     </GridLayout>
-    <mdc:BottomNavigation
+    <mdc:BottomNavigationBar
       class="custom-bottom-navigation-bar"
       tabSelected="tabSelected"
       tabPressed="tabPressed"
@@ -23,6 +23,6 @@
       <mdc:BottomNavigationTab
         title="Third"
         icon="res://ic_menu" />
-    </mdc:BottomNavigation>
+    </mdc:BottomNavigationBar>
   </GridLayout>
 </Page>

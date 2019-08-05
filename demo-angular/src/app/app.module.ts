@@ -1,6 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
-import { NativeScriptBottomNavigationModule } from 'nativescript-bottom-navigation/angular';
+import { NativeScriptBottomNavigationBarModule } from 'nativescript-bottom-navigation/angular';
 
 import { TabsComponent } from './tabs/tabs.component';
 import { FirstTabComponent } from './first-tab/first-tab.component';
@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     NativeScriptModule,
     AppRoutingModule,
-    NativeScriptBottomNavigationModule,
+    NativeScriptBottomNavigationBarModule,
   ],
   declarations: [
     AppComponent,

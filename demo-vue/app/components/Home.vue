@@ -8,7 +8,7 @@
       <GridLayout row="0">
         <Label class="h1 text-center" text="bottom-navigation-bar"></Label>
       </GridLayout>
-      <BottomNavigation
+      <BottomNavigationBar
         class="custom-bottom-navigation-bar"
         @tabPressed="onBottomNavigationTabPressed"
         @tabSelected="onBottomNavigationTabSelected"
@@ -18,7 +18,7 @@
         <BottomNavigationTab title="First" icon="res://ic_home"/>
         <BottomNavigationTab title="Second" icon="res://ic_view_list" isSelectable="false"/>
         <BottomNavigationTab title="Third" icon="res://ic_menu"/>
-      </BottomNavigation>
+      </BottomNavigationBar>
     </GridLayout>
   </Page>
 </template>
@@ -56,9 +56,9 @@ export default {
 
 // Custom styles
 .custom-bottom-navigation-bar {
-  active-color: white;
-  background-color: #fd485a;
-  inactive-color: #fc99a2;
+  active-color: #0d43f3;
+  background-color: white;
+  inactive-color: #9eb1f0;
 }
 
 </style>
