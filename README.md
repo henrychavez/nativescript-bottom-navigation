@@ -1,12 +1,13 @@
-# Nativescript Bottom Navigation
+# Nativescript Material Bottom Navigation Bar
 
-Nativescript plugin for Android & iOS to have the Bottom Navigation bar following the Material Design Guidelines.
+Nativescript plugin for Android & iOS to have the Bottom Navigation Bar following the Material Design Guidelines.
 
 [![npm](https://img.shields.io/npm/v/nativescript-bottom-navigation.svg)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![npm](https://img.shields.io/npm/dt/nativescript-bottom-navigation.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![Build Status](https://travis-ci.org/henrychavez/nativescript-bottom-navigation.svg?branch=master)](https://travis-ci.org/henrychavez/nativescript-bottom-navigation)
 
 <img alt="iOS" src="screenshots/screenshot-ios.png" width="250">
 
 ## Contents
+
 1.  [Installation](#installation)
 2.  [Usage with Javascript](#usage)
 3.  [Usage with Angular](#angular)
@@ -16,17 +17,17 @@ Nativescript plugin for Android & iOS to have the Bottom Navigation bar followin
 
 ### Prerequisites / Requirements
 
-You need the version of NS3 or later to use this plugin.
+You need the version of NS6 or later to use this plugin.
 
 ### Installation
 
 ```javascript
-tns plugin add nativescript-bottom-navigation
+tns plugin add nativescript-material-bottomnavigationbar
 ```
 
-### Usage 
+### Usage
 
-Before start using the plugin you need to add the icons for android & iOS in your App_Resources directory.
+Before start using the plugin you need to add the icons for android & iOS in your `App_Resources` directory.
 
 #### XML
 
@@ -34,183 +35,143 @@ You can set the tabs using the `tabs` property
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:bottomNav="nativescript-bottom-navigation"
+      xmlns:mdc="nativescript-material-bottomnavigationbar"
       loaded="pageLoaded"
       class="page">
-    <GridLayout columns="*"
-                rows="*, auto">
+    <GridLayout rows="*, auto">
         <StackLayout row="0">
             <Label text="content"></Label>
         </StackLayout>
-        <bottomNav:BottomNavigation tabs="{{ tabs }}"
-                                    activeColor="green"
-                                    inactiveColor="red"
-                                    backgroundColor="black"
-                                    loaded="bottomNavigationLoaded"
-                                    row="1"></bottomNav:BottomNavigation>
+        <mdc:BottomNavigationBar
+          tabs="{{ tabs }}"
+          activeColor="green"
+          inactiveColor="red"
+          backgroundColor="black"
+          tabSelected="tabSelected"
+          row="1"
+        ></mdc:BottomNavigationBar>
     </GridLayout>
 </Page>
 ```
 
-```javascript
-import * as observable from 'tns-core-modules/data/observable';
-import * as pages from 'tns-core-modules/ui/page';
-import { BottomNavigation, BottomNavigationTab, OnTabSelectedEventData } from "nativescript-bottom-navigation";
+```typescript
+import { EventData } from 'tns-core-modules/data/observable';
+import { Page } from 'tns-core-modules/ui/page';
+import {
+  BottomNavigationTab,
+  TabSelectedEventData,
+} from 'nativescript-material-bottomnavigationbar';
 
 // Event handler for Page 'loaded' event attached in main-page.xml
-export function pageLoaded(args: observable.EventData) {
+export function pageLoaded(args: EventData) {
   // Get the event sender
-  let page = <pages.Page>args.object;
+  let page = <Page>args.object;
   page.bindingContext = {
-      tabs: [
-        new BottomNavigationTab('First', 'ic_home'),
-        new BottomNavigationTab('Second', 'ic_view_list'),
-        new BottomNavigationTab('Third', 'ic_menu')
-      ]
+    tabs: [
+      new BottomNavigationTab({ title: 'First', icon: 'res://ic_home' }),
+      new BottomNavigationTab({
+        title: 'Second',
+        icon: 'res://ic_view_list',
+        isSelectable: false,
+      }),
+      new BottomNavigationTab({ title: 'Third', icon: 'res://ic_menu' }),
+    ],
   };
 }
 
-export function bottomNavigationLoaded(args) {
-  let bottomNavigation: BottomNavigation = args.object;
-  // For some reason the tabSelected event doesn't work if you
-  // handle it from the view, so you need to handle the event in this way.
-  bottomNavigation.on('tabSelected', tabSelected);
-
-}
-
-export function tabSelected(args: OnTabSelectedEventData) {
+export function tabSelected(args: TabSelectedEventData) {
   console.log('tab selected ' + args.newIndex);
 }
-
 ```
 
 or you can add the tabs directly in your xml view
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:bottomNav="nativescript-bottom-navigation"
+      xmlns:mdc="nativescript-material-bottomnavigationbar"
       loaded="pageLoaded"
       class="page">
-    <GridLayout columns="*"
-                rows="*, auto">
+    <GridLayout rows="*, auto">
         <StackLayout row="0">
             <Label text="content"></Label>
         </StackLayout>
-        <bottomNav:BottomNavigation activeColor="green"
-                                    inactiveColor="red"
-                                    backgroundColor="black"
-                                    loaded="bottomNavigationLoaded"
-                                    row="1">
-            <bottomNav:BottomNavigationTab title="First" icon="ic_home"></bottomNav:BottomNavigationTab>
-            <bottomNav:BottomNavigationTab title="Second" icon="ic_view_list"></bottomNav:BottomNavigationTab>
-            <bottomNav:BottomNavigationTab title="Third" icon="ic_menu"></bottomNav:BottomNavigationTab>
-        </bottomNav:BottomNavigation>
+        <mdc:BottomNavigationBar
+          activeColor="green"
+          inactiveColor="red"
+          backgroundColor="black"
+          tabSelected="tabSelected"
+          row="1"
+        >
+          <mdc:BottomNavigationTab title="First" icon="res://ic_home" />
+          <mdc:BottomNavigationTab title="Second" icon="res://ic_view_list" isSelectable="false" />
+          <mdc:BottomNavigationTab title="Third" icon="res://ic_menu" />
+        </mdc:BottomNavigationBar>
     </GridLayout>
 </Page>
 ```
 
-```javascript
-import * as observable from 'tns-core-modules/data/observable';
-import * as pages from 'tns-core-modules/ui/page';
-import { BottomNavigation, BottomNavigationTab, OnTabSelectedEventData } from "nativescript-bottom-navigation";
-
-// Event handler for Page 'loaded' event attached in main-page.xml
-export function pageLoaded(args: observable.EventData) {
-  // Get the event sender
-  let page = <pages.Page>args.object;
-}
-
-export function bottomNavigationLoaded(args) {
-  let bottomNavigation: BottomNavigation = args.object;
-  bottomNavigation.on('tabSelected', tabSelected);
-
-}
-
-export function tabSelected(args: OnTabSelectedEventData) {
-  console.log('tab selected ' + args.newIndex);
-}
-
-```
-
 #### Angular
 
-First you need to include the `NativescriptBottomNavigationModule` in your app.module.ts
+First you need to include the `NativeScriptMaterialBottomNavigationBarModule` in your `app.module.ts``
 
-```javascript
-import { NativescriptBottomNavigationModule} from "nativescript-bottom-navigation/angular";
+```typescript
+import { NativeScriptMaterialBottomNavigationBarModule} from "nativescript-material-bottomnavigationbar/angular";
 
 @NgModule({
     imports: [
-        NativescriptBottomNavigationModule
+        NativeScriptMaterialBottomNavigationBarModule
     ],
     ...
 })
 ```
 
-As the examples in the Javascript/Typescript version you can use the `tabs` property to set the BottomNavigationTabs
-
-```xml
+```html
 <GridLayout rows="*, auto">
-    <StackLayout row="0">
-       <Label text="content"></Label>
-    </StackLayout>
-    <BottomNavigation [tabs]="tabs"
-                      activeColor="red"
-                      inactiveColor="yellow"
-                      backgroundColor="black"
-                      (tabSelected)="onBottomNavigationTabSelected($event)"
-                      (tabPressed)="onBottomNavigationTabPressed($event)"
-                      row="1"></BottomNavigation>
+  <StackLayout row="0">
+    <label text="content"></label>
+  </StackLayout>
+  <BottomNavigationBar
+    [tabs]="tabs"
+    activeColor="red"
+    inactiveColor="yellow"
+    backgroundColor="black"
+    (tabSelected)="onBottomNavigationTabSelected($event)"
+    (tabPressed)="onBottomNavigationTabPressed($event)"
+    row="1"
+  ></BottomNavigationBar>
 </GridLayout>
 ```
 
-or you can declare the BottomNavigationTabs in your html directly
+or you can declare the `BottomNavigationTab` in your html directly
 
-```xml
+```html
 <GridLayout rows="*, auto">
-    <StackLayout row="0">
-       <Label text="content"></Label>
-    </StackLayout>
-    <BottomNavigation activeColor="red"
-                      inactiveColor="yellow"
-                      backgroundColor="black"
-                      (tabSelected)="onBottomNavigationTabSelected($event)"
-                      (tabPressed)="onBottomNavigationTabPressed($event)"
-                      row="1">
-        <BottomNavigationTab title="First" icon="ic_home"></BottomNavigationTab>
-        <BottomNavigationTab title="Second" icon="ic_view_list"></BottomNavigationTab>
-        <BottomNavigationTab title="Third" icon="ic_menu"></BottomNavigationTab>
-    </BottomNavigation>
+  <StackLayout row="0">
+    <label text="content"></label>
+  </StackLayout>
+  <BottomNavigationBar
+    activeColor="red"
+    inactiveColor="yellow"
+    backgroundColor="black"
+    (tabSelected)="onBottomNavigationTabSelected($event)"
+    (tabPressed)="onBottomNavigationTabPressed($event)"
+    row="1"
+  >
+    <BottomNavigationTab
+      title="First"
+      icon="res://ic_home"
+    ></BottomNavigationTab>
+    <BottomNavigationTab
+      title="Second"
+      icon="res://ic_view_list"
+      [isSelectable]="false"
+    ></BottomNavigationTab>
+    <BottomNavigationTab
+      title="Third"
+      icon="res://ic_menu"
+    ></BottomNavigationTab>
+  </BottomNavigationBar>
 </GridLayout>
-```
-
-```javascript
-import { Component, OnInit } from "@angular/core";
-import { BottomNavigation, BottomNavigationTab, OnTabPressedEventData, OnTabSelectedEventData } from 'nativescript-bottom-navigation';
-
-@Component(
-  {
-    selector: "ns-app",
-    moduleId: module.id,
-    templateUrl: "./app.component.html",
-  }
-)
-export class AppComponent {
-
-  public tabs: BottomNavigationTab[] = [
-    new BottomNavigationTab('First', 'ic_home'),
-    new BottomNavigationTab('Second', 'ic_view_list'),
-    new BottomNavigationTab('Third', 'ic_menu')
-  ];
-
-  onBottomNavigationTabPressed(args: OnTabPressedEventData): void {
-    console.log(`Tab pressed:  ${args.index}`);
-  }
-
-  onBottomNavigationTabSelected(args: OnTabSelectedEventData): void {
-    console.log(`Tab selected:  ${args.oldIndex}`);
-  }
-}
 ```
 
 #### Vue
@@ -218,27 +179,33 @@ export class AppComponent {
 If you want to use this plugin with Vue, do this in your `app.js` or `main.js`:
 
 ```javascript
-import BottomNavigation from 'nativescript-bottom-navigation/vue';
+import BottomNavigationBar from 'nativescript-material-bottomnavigationbar/vue';
 
-Vue.use(BottomNavigation)
+Vue.use(BottomNavigationBar);
 ```
 
-This will install and register `BottomNavigation` and `BottomNavigationTab` components to your `Vue` instance and now you can use the plugin as follows:
+This will install and register `BottomNavigationBar` and `BottomNavigationTab` components to your `Vue` instance and now you can use the plugin as follows:
 
-```xml
+```html
 <GridLayout rows="*, auto">
-    <StackLayout row="0">
-       <Label text="content"></Label>
-    </StackLayout>
-    <BottomNavigation activeColor="red"
-                      inactiveColor="yellow"
-                      backgroundColor="black"
-                      @tabSelected="onBottomNavigationTabSelected"
-                      row="1">
-        <BottomNavigationTab title="First" icon="ic_home" />
-        <BottomNavigationTab title="Second" icon="ic_view_list" />
-        <BottomNavigationTab title="Third" icon="ic_menu" />
-    </BottomNavigation>
+  <StackLayout row="0">
+    <label text="content"></label>
+  </StackLayout>
+  <BottomNavigationBar
+    activeColor="red"
+    inactiveColor="yellow"
+    backgroundColor="black"
+    @tabSelected="onBottomNavigationTabSelected"
+    row="1"
+  >
+    <BottomNavigationTab title="First" icon="ic_home" />
+    <BottomNavigationTab
+      title="Second"
+      icon="ic_view_list"
+      isSelectable="false"
+    />
+    <BottomNavigationTab title="Third" icon="ic_menu" />
+  </BottomNavigationBar>
 </GridLayout>
 ```
 
@@ -246,64 +213,67 @@ You can find more information of how to use nativescript plugins with Vue [Here!
 
 #### CSS Styling
 
-You can also use your css file to set or change the activeColor, inactiveColor & backgroundColor of the Bottom Navigation.
+You can also use your css file to set or change the `activeColor`, `inactiveColor` & `backgroundColor` of the Bottom Navigation Bar.
 
 ```css
 .botom-nav {
-    tab-active-color: green;
-    tab-inactive-color: black;
-    tab-background-color: blue;
+  active-color: green;
+  inactive-color: black;
+  background-color: blue;
 }
 ```
 
 ## API
 
-1. [BottomNavigation](#bottom-navigation)
+1. [BottomNavigationBar](#bottom-navigation-bar)
 2. [BottomNavigationTab](#bottom-navigation-tab)
 
-** properties (bindable) = properties settable thew XML/HTML
-** events = event properties settable thew XML/HTML
-** properties (internal) = properties settable thew JS/TS instance
+- **Properties (bindable):** Properties settable through XML/HTML
+- **Properties (internal):** Properties accessible through JS/TS instance
+- **Events:** Event properties settable thew XML/HTML
 
-# Bottom Navigation
+# Bottom Navigation Bar
 
 #### Properties (bindable)
 
-| Property | Required | Default | Type | Description |
-| --- | --- | --- | --- | --- |
-| tabs | true | null | `Array<BottomNavigationTab>` | Array containing the tabs for the BottomNavigation |
-| titleVisibility | false | "selected" | `"selected" | "always" | "never"` | Title Visibility for each BottomNavigationTab  |
-| activeColor | false | "blue" | `String` | Color of the BottomNavigationTab when it's selected  |
-| inactiveColor | false | "gray" | `String` | Color of the BottomNavigationTab when it's not selected  |
-| backgroundColor | false | "white" | `String` | Color of the BottomNavigation background  |
+| Property        | Required | Default                     | Type                         | Description                                             |
+| --------------- | -------- | --------------------------- | ---------------------------- | ------------------------------------------------------- |
+| tabs            | true     | []                          | `Array<BottomNavigationTab>` | Array containing the tabs for the BottomNavigationBar   |
+| titleVisibility | false    | `TitleVisibility.Selected` | `TitleVisibility`            | Title Visibility for each BottomNavigationTab           |
+| activeColor     | false    | "black"                     | `String`                     | Color of the BottomNavigationTab when it's selected     |
+| inactiveColor   | false    | "gray"                      | `String`                     | Color of the BottomNavigationTab when it's not selected |
+| backgroundColor | false    | "white"                     | `String`                     | Color of the BottomNavigation background                |
+
+#### Properties (internal)
+
+| Property         | Default                     | Type              | Description                                             |
+| ---------------- | --------------------------- | ----------------- | ------------------------------------------------------- |
+| selectedTabIndex | 0                           | `Number`          | Index of the selected tab                               |
+| titleVisibility  | `TitleVisibility.Selected` | `TitleVisibility` | Title Visibility for each BottomNavigationTab           |
+| activeColor      | "black"                     | `String`          | Color of the BottomNavigationTab when it's selected     |
+| inactiveColor    | "gray"                      | `String`          | Color of the BottomNavigationTab when it's not selected |
+| backgroundColor  | "white"                     | `String`          | Color of the BottomNavigation background                |
 
 #### Events
 
-| Property | Required | Default | Type | Description |
-| --- | --- | --- | --- | --- |
-| tabSelected | false | null | `function ($event: OnTabSelectedEventData) {}` | Function fired every time the user select a new tab that receive an event object |
-| tabReselected | false | null | `function ($event: OnTabReselectedEventData) {}` | Function fired every time the user select a tab that is already selected and receive an event object |
-| tabPressed | false | null | `function ($event: OnTabPressedEventData) {}` | Function fired every time the user tap a tab with `selectable: false` that receive an event object |
-
-#### Properties (internal)
-
-| Property | Required | Default | Type | Description |
-| --- | --- | --- | --- | --- |
-| selectedTabIndex | true | 0 | `Number` | Index of the selected tab |
+| Name          | Type                                   | Description                                                              |
+| ------------- | -------------------------------------- | ------------------------------------------------------------------------ |
+| tabPressed    | `(args: TabPressedEventData): void`    | Function fired every time the user tap a tab with `isSelectable: false`  |
+| tabSelected   | `(args: TabSelectedEventData): void`   | Function fired every time the user select a new tab                      |
+| tabReselected | `(args: TabReselectedEventData): void` | Function fired every time the user select a tab that is already selected |
 
 #### Methods
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `selectTab(index: number)` | `Void` | Select a tab programmatically |
-| `createTabs(tabs: BottomNavigationTab[])` | `Void` | Create the tabs programmatically |
+| Property                   | Type   | Description                   |
+| -------------------------- | ------ | ----------------------------- |
+| `selectTab(index: number)` | `void` | Select a tab programmatically |
 
 # Bottom Navigation Tab
 
-#### Properties (internal)
+#### Properties (bindable)
 
-| Property | Required | Default | Type | Description |
-| --- | --- | --- | --- | --- |
-| title | true | null | `String` | Title of the tab |
-| icon | true | null | `String` | Icon of the tab  |
-| selectable | false | true | `Boolean` | Determine if the tab can be selected or not (The `tabSelected` event still be fired)  |
+| Property     | Required | Default | Type      | Description                                 |
+| ------------ | -------- | ------- | --------- | ------------------------------------------- |
+| title        | true     | null    | `string`  | Title of the tab                            |
+| icon         | true     | null    | `string`  | Icon of the tab                             |
+| isSelectable | false    | true    | `boolean` | Determine if the tab can be selected or not |
