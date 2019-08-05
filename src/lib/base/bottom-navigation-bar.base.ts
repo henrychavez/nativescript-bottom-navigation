@@ -6,6 +6,7 @@ import {
   Property,
   CssProperty,
   Style,
+  AddArrayFromBuilder,
 } from 'tns-core-modules/ui/core/view';
 
 import {
@@ -17,30 +18,21 @@ import {
 
 import { BottomNavigationTabBase } from './bottom-navigation-tab.base';
 
-@CSSType('BottomNavigation')
-export abstract class BottomNavigationBase extends View
+@CSSType('BottomNavigationBar')
+export abstract class BottomNavigationBarBase extends View
   implements AddChildFromBuilder {
   static tabPressedEvent = 'tabPressed';
   static tabSelectedEvent = 'tabSelected';
   static tabReselectedEvent = 'tabReselected';
-  /**
-   * Get or set the Bottom Navigation tabs
-   */
+
+  selectedTabIndex: number = 0;
+  titleVisibility: TitleVisibility = TitleVisibility.Selected;
+
   protected _items: BottomNavigationTabBase[] = [];
 
   get items(): BottomNavigationTabBase[] {
     return this._items;
   }
-
-  /**
-   * Get or set the current selected tab index
-   */
-  selectedTabIndex: number = 0;
-
-  /**
-   * Get ot Set the Title Visibility
-   */
-  titleVisibility: TitleVisibility = TitleVisibility.Selected;
 
   get inactiveColor(): Color {
     return this.style.inactiveColor;
@@ -66,9 +58,6 @@ export abstract class BottomNavigationBase extends View
     this.style.backgroundColor = color;
   }
 
-  /**
-   * Method allowing to manually select a tab
-   */
   selectTab(index: number): void {
     if (index === this.selectedTabIndex) {
       return;
@@ -79,7 +68,7 @@ export abstract class BottomNavigationBase extends View
 
   _emitTabPressed(index: number) {
     let eventData: TabPressedEventData = {
-      eventName: BottomNavigationBase.tabPressedEvent,
+      eventName: BottomNavigationBarBase.tabPressedEvent,
       object: this,
       index,
     };
@@ -89,7 +78,7 @@ export abstract class BottomNavigationBase extends View
 
   _emitTabSelected(index: number) {
     let eventData: TabSelectedEventData = {
-      eventName: BottomNavigationBase.tabSelectedEvent,
+      eventName: BottomNavigationBarBase.tabSelectedEvent,
       object: this,
       oldIndex: this.selectedTabIndex,
       newIndex: index,
@@ -101,7 +90,7 @@ export abstract class BottomNavigationBase extends View
 
   _emitTabReselected(index: number) {
     let eventData: TabReselectedEventData = {
-      eventName: BottomNavigationBase.tabReselectedEvent,
+      eventName: BottomNavigationBarBase.tabReselectedEvent,
       object: this,
       index,
     };
@@ -124,7 +113,7 @@ export abstract class BottomNavigationBase extends View
 }
 
 export const tabsProperty = new Property<
-  BottomNavigationBase,
+  BottomNavigationBarBase,
   BottomNavigationTabBase[]
 >({
   name: 'tabs',
@@ -132,10 +121,10 @@ export const tabsProperty = new Property<
   defaultValue: [],
 });
 
-tabsProperty.register(BottomNavigationBase);
+tabsProperty.register(BottomNavigationBarBase);
 
 export const titleVisibilityProperty = new Property<
-  BottomNavigationBase,
+  BottomNavigationBarBase,
   TitleVisibility
 >({
   name: 'titleVisibility',
@@ -145,7 +134,7 @@ export const titleVisibilityProperty = new Property<
   valueConverter: v => TitleVisibility[v],
 });
 
-titleVisibilityProperty.register(BottomNavigationBase);
+titleVisibilityProperty.register(BottomNavigationBarBase);
 
 export const activeColorCssProperty = new CssProperty<Style, Color>({
   name: 'activeColor',

@@ -7,37 +7,42 @@ import {
 } from 'tns-core-modules/ui/core/view';
 
 import {
-  BottomNavigationBase,
+  BottomNavigationBarBase,
   tabsProperty,
   titleVisibilityProperty,
   activeColorCssProperty,
   inactiveColorCssProperty,
-} from '../base/bottom-navigation.base';
-import { TitleVisibility } from '../internal/internals';
+} from '../base/bottom-navigation-bar.base';
 
 import { BottomNavigationTab } from './bottom-navigation-tab';
-import { BottomNavigationDelegate } from './bottom-navigation.delegate';
+import { BottomNavigationBarDelegate } from './bottom-navigation-bar.delegate';
 
-export class BottomNavigation extends BottomNavigationBase {
+export class BottomNavigationBar extends BottomNavigationBarBase {
   nativeView: MDCBottomNavigationBar;
 
-  private _delegate: BottomNavigationDelegate;
+  private _delegate: BottomNavigationBarDelegate;
 
   get ios(): MDCBottomNavigationBar {
     return this.nativeView;
   }
 
   createNativeView(): Object {
-    this._delegate = BottomNavigationDelegate.initWithOwner(new WeakRef(this));
-    this.nativeView = MDCBottomNavigationBar.alloc().init();
+    const nativeView = MDCBottomNavigationBar.alloc().init();
+    this._delegate = BottomNavigationBarDelegate.initWithOwner(
+      new WeakRef(this),
+    );
 
-    return this.nativeView;
+    return nativeView;
   }
 
   initNativeView(): void {
+    // Create the tabs before setting the default values for each tab
     this.createTabs();
-
+    // Set default LabelVisibilityMode
+    this.nativeView.titleVisibility = this.titleVisibility as any;
+    // Set default ActiveColor
     this.nativeView.selectedItemTintColor = this.activeColor.ios;
+    // Set default InactiveColor
     this.nativeView.unselectedItemTintColor = this.inactiveColor.ios;
   }
 
@@ -48,6 +53,11 @@ export class BottomNavigation extends BottomNavigationBase {
   onLoaded() {
     super.onLoaded();
     this.nativeView.delegate = this._delegate;
+  }
+
+  onUnloaded() {
+    this.nativeView.delegate = null;
+    super.onUnloaded();
   }
 
   layoutNativeView(
@@ -101,6 +111,7 @@ export class BottomNavigation extends BottomNavigationBase {
   [titleVisibilityProperty.setNative](
     titleVisibility: MDCBottomNavigationBarTitleVisibility,
   ) {
+    console.log('serrting adasdasdas');
     this.nativeView.titleVisibility = titleVisibility;
   }
 
@@ -120,7 +131,6 @@ export class BottomNavigation extends BottomNavigationBase {
     if (!this._items) {
       this._items = tabs;
     }
-
     const bottomNavigationTabs = this._items.map((tab, index) =>
       UITabBarItem.alloc().initWithTitleImageTag(
         tab.title,

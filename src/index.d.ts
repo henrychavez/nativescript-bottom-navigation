@@ -1,4 +1,4 @@
-import { BottomNavigationBase } from './lib/base/bottom-navigation.base';
+import { BottomNavigationBarBase } from './lib/base/bottom-navigation-bar.base';
 import { BottomNavigationTabBase } from './lib/base/bottom-navigation-tab.base';
 import {
   TabSelectedEventData,
@@ -9,7 +9,7 @@ import {
 
 export * from './lib/internal/internals';
 
-export declare class BottomNavigation extends BottomNavigationBase {
+export declare class BottomNavigationBar extends BottomNavigationBarBase {
   static tabPressedEvent: string;
   static tabSelectedEvent: string;
   static tabReselectedEvent: string;

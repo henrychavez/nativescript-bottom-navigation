@@ -1,4 +1,4 @@
-import { BottomNavigation } from '../bottom-navigation';
+import { BottomNavigationBar } from '../bottom-navigation-bar';
 
 // Classes shortcuts
 const { BottomNavigationView } = com.google.android.material.bottomnavigation;
@@ -9,9 +9,9 @@ declare type OnNavigationItemReselectedListenerType = com.google.android.materia
 @Interfaces([BottomNavigationView.OnNavigationItemReselectedListener])
 export class OnTabReselectedListener extends java.lang.Object
   implements OnNavigationItemReselectedListenerType {
-  private _owner: BottomNavigation;
+  private _owner: BottomNavigationBar;
 
-  static initWithOwner(owner: WeakRef<BottomNavigation>) {
+  static initWithOwner(owner: WeakRef<BottomNavigationBar>) {
     const listener = new OnTabReselectedListener();
     listener._owner = owner.get();
     return listener;

@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { registerElement } from 'nativescript-angular/element-registry';
 
-import { DIRECTIVES } from './nativescript-bottom-navigation.directives';
+import { DIRECTIVES } from './nativescript-bottom-navigation-bar.directives';
 
 @NgModule({
   declarations: [DIRECTIVES],
   exports: [DIRECTIVES],
 })
-export class NativeScriptBottomNavigationModule {}
+export class NativeScriptBottomNavigationBarModule {}
 
-registerElement('BottomNavigation', () => require('../').BottomNavigation);
+registerElement(
+  'BottomNavigationBar',
+  () => require('../').BottomNavigationBar,
+);
 registerElement(
   'BottomNavigationTab',
   () => require('../').BottomNavigationTab,

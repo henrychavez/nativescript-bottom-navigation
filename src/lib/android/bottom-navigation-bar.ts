@@ -1,12 +1,12 @@
 import { Color } from 'tns-core-modules/color/color';
 
 import {
-  BottomNavigationBase,
+  BottomNavigationBarBase,
   tabsProperty,
   titleVisibilityProperty,
   activeColorCssProperty,
   inactiveColorCssProperty,
-} from '../base/bottom-navigation.base';
+} from '../base/bottom-navigation-bar.base';
 
 import { OnTabReselectedListener } from './listeners/on-tab-reselected.listener';
 import { OnTabSelectedListener } from './listeners/on-tab-selected.listener';
@@ -18,7 +18,7 @@ import { createColorStateList } from './utils';
 const { BottomNavigationView } = com.google.android.material.bottomnavigation;
 const { Menu } = android.view;
 
-export class BottomNavigation extends BottomNavigationBase {
+export class BottomNavigationBar extends BottomNavigationBarBase {
   nativeView: com.google.android.material.bottomnavigation.BottomNavigationView;
 
   get android() {
@@ -28,7 +28,7 @@ export class BottomNavigation extends BottomNavigationBase {
   public createNativeView() {
     const nativeView = new BottomNavigationView(this._context);
 
-    const owner = new WeakRef<BottomNavigation>(this);
+    const owner = new WeakRef(this);
 
     nativeView.setOnNavigationItemSelectedListener(
       OnTabSelectedListener.initWithOwner(owner),

@@ -1,9 +1,9 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: 'BottomNavigation',
+  selector: 'BottomNavigationBar',
 })
-export class BottomNavigationDirective {}
+export class BottomNavigationBarDirective {}
 
 @Directive({
   selector: 'BottomNavigationTab',
@@ -11,6 +11,6 @@ export class BottomNavigationDirective {}
 export class BottomNavigationTabDirective {}
 
 export const DIRECTIVES = [
-  BottomNavigationDirective,
+  BottomNavigationBarDirective,
   BottomNavigationTabDirective,
 ];

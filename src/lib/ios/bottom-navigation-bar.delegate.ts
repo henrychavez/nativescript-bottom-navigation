@@ -1,17 +1,19 @@
-import { BottomNavigation } from './bottom-navigation';
+import { BottomNavigationBar } from './bottom-navigation-bar';
 
 type MDCBottomNavigationBar = any;
 
 export declare class MDCBottomNavigationBarDelegate {}
 
-export class BottomNavigationDelegate extends NSObject {
+export class BottomNavigationBarDelegate extends NSObject {
   static ObjCProtocols = [MDCBottomNavigationBarDelegate];
-  private _owner: BottomNavigation;
+  private _owner: BottomNavigationBar;
 
   static initWithOwner(
-    owner: WeakRef<BottomNavigation>,
-  ): BottomNavigationDelegate {
-    const delegate = <BottomNavigationDelegate>BottomNavigationDelegate.new();
+    owner: WeakRef<BottomNavigationBar>,
+  ): BottomNavigationBarDelegate {
+    const delegate = <BottomNavigationBarDelegate>(
+      BottomNavigationBarDelegate.new()
+    );
     delegate._owner = owner.get();
 
     return delegate;
