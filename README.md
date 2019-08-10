@@ -4,6 +4,8 @@ Nativescript plugin for Android & iOS to have the Bottom Navigation Bar followin
 
 [![npm](https://img.shields.io/npm/v/nativescript-bottom-navigation.svg)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![npm](https://img.shields.io/npm/dt/nativescript-bottom-navigation.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-bottom-navigation) [![Build Status](https://travis-ci.org/henrychavez/nativescript-bottom-navigation.svg?branch=master)](https://travis-ci.org/henrychavez/nativescript-bottom-navigation)
 
+> **IMPORTANT:** This package will be deprecated, this is the last release on this repository, the component will be moved to [nativescript-material-components](https://github.com/Akylas/nativescript-material-components)
+
 <img alt="iOS" src="screenshots/screenshot-ios.png" width="250">
 
 ## Contents
@@ -22,8 +24,30 @@ You need the version of NS6 or later to use this plugin.
 ### Installation
 
 ```javascript
-tns plugin add nativescript-material-bottomnavigationbar
+tns plugin add nativescript-bottom-navigation
 ```
+
+if you want to use the plugin with NS5 and above use the version `1.5.1`
+
+```javascript
+tns plugin add nativescript-bottom-navigation@1.5.1
+```
+
+### BREAKING CHANGES
+
+- `BottomNavigation` class now is `BottomNavigationBar`
+- `NativescriptBottomNavigationModule` now is `NativeScriptBottomNavigationBarModule`
+- `res://` should be used to reference icons in the tabs
+- The prefix `On` of the Event interfaces was removed:
+  - Example: `OnTabPressedEventData` now is `TabPressedEventData`
+- The prefix `tab` of Css properties was removed:
+  - Example: `tab-active-color` now is `active-color`
+- **The documentation was updated review it :D**
+
+### NEW FEATURES
+
+- `Badge` now are supported using the method: `showBadge(index, value)`
+  - NOTE: if you want to show a badge as a red dot no value should be passed to the function.
 
 ### Usage
 
@@ -35,7 +59,7 @@ You can set the tabs using the `tabs` property
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:mdc="nativescript-material-bottomnavigationbar"
+      xmlns:mdc="nativescript-bottom-navigation"
       loaded="pageLoaded"
       class="page">
     <GridLayout rows="*, auto">
@@ -60,7 +84,7 @@ import { Page } from 'tns-core-modules/ui/page';
 import {
   BottomNavigationTab,
   TabSelectedEventData,
-} from 'nativescript-material-bottomnavigationbar';
+} from 'nativescript-bottom-navigation';
 
 // Event handler for Page 'loaded' event attached in main-page.xml
 export function pageLoaded(args: EventData) {
@@ -88,7 +112,7 @@ or you can add the tabs directly in your xml view
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:mdc="nativescript-material-bottomnavigationbar"
+      xmlns:mdc="nativescript-bottom-navigation"
       loaded="pageLoaded"
       class="page">
     <GridLayout rows="*, auto">
@@ -112,14 +136,14 @@ or you can add the tabs directly in your xml view
 
 #### Angular
 
-First you need to include the `NativeScriptMaterialBottomNavigationBarModule` in your `app.module.ts``
+First you need to include the `NativeScriptBottomNavigationBarModule` in your `app.module.ts``
 
 ```typescript
-import { NativeScriptMaterialBottomNavigationBarModule} from "nativescript-material-bottomnavigationbar/angular";
+import { NativeScriptBottomNavigationBarModule} from "nativescript-bottom-navigation/angular";
 
 @NgModule({
     imports: [
-        NativeScriptMaterialBottomNavigationBarModule
+        NativeScriptBottomNavigationBarModule
     ],
     ...
 })
@@ -179,7 +203,7 @@ or you can declare the `BottomNavigationTab` in your html directly
 If you want to use this plugin with Vue, do this in your `app.js` or `main.js`:
 
 ```javascript
-import BottomNavigationBar from 'nativescript-material-bottomnavigationbar/vue';
+import BottomNavigationBar from 'nativescript-bottom-navigation/vue';
 
 Vue.use(BottomNavigationBar);
 ```
@@ -264,9 +288,10 @@ You can also use your css file to set or change the `activeColor`, `inactiveCol
 
 #### Methods
 
-| Property                   | Type   | Description                   |
-| -------------------------- | ------ | ----------------------------- |
-| `selectTab(index: number)` | `void` | Select a tab programmatically |
+| Property                                   | Type   | Description                      |
+| ------------------------------------------ | ------ | -------------------------------- |
+| `selectTab(index: number)`                 | `void` | Select a tab programmatically    |
+| `showBadge(index: number, value?: number)` | `void` | Show a badge for an specific tab |
 
 # Bottom Navigation Tab
 
