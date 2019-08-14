@@ -1,31 +1,48 @@
 import { BottomNavigationBar } from '../bottom-navigation-bar';
 
-// Classes shortcuts
-const { BottomNavigationView } = com.google.android.material.bottomnavigation;
+// Types shortcuts
+declare type OnNavigationItemSelectedListener = com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
-// Interface shortcuts
-declare type OnNavigationItemSelectedListenerType = com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
+interface OnTabSelectedlistener {
+  new (owner: BottomNavigationBar): OnNavigationItemSelectedListener;
+}
 
-@Interfaces([BottomNavigationView.OnNavigationItemSelectedListener])
-export class OnTabSelectedListener extends java.lang.Object
-  implements OnNavigationItemSelectedListenerType {
-  private _owner: BottomNavigationBar;
+let OnTabSelectedlistener: OnTabSelectedlistener;
 
-  static initWithOwner(owner: WeakRef<BottomNavigationBar>) {
-    const listener = new OnTabSelectedListener();
-    listener._owner = owner.get();
-    return listener;
+export const getOnTabSelectedlistener = () => {
+  if (OnTabSelectedlistener) {
+    return OnTabSelectedlistener;
   }
 
-  public onNavigationItemSelected(item: android.view.MenuItem): boolean {
-    const bottomNavigationTab = this._owner.items[item.getItemId()];
+  @Interfaces([
+    com.google.android.material.bottomnavigation.BottomNavigationView
+      .OnNavigationItemSelectedListener,
+  ])
+  class OnTabSelectedlistenerImpl extends java.lang.Object
+    implements OnNavigationItemSelectedListener {
+    constructor(public owner: BottomNavigationBar) {
+      super();
 
-    if (bottomNavigationTab.isSelectable) {
-      this._owner._emitTabSelected(item.getItemId());
-    } else {
-      this._owner._emitTabPressed(item.getItemId());
+      // necessary when extending TypeScript constructors
+      return global.__native(this);
     }
 
-    return bottomNavigationTab.isSelectable;
+    public onNavigationItemSelected(
+      menuItem: globalAndroid.view.MenuItem,
+    ): boolean {
+      const bottomNavigationTab = this.owner.items[menuItem.getItemId()];
+
+      if (bottomNavigationTab.isSelectable) {
+        this.owner._emitTabSelected(menuItem.getItemId());
+      } else {
+        this.owner._emitTabPressed(menuItem.getItemId());
+      }
+
+      return bottomNavigationTab.isSelectable;
+    }
   }
-}
+
+  OnTabSelectedlistener = OnTabSelectedlistenerImpl;
+
+  return OnTabSelectedlistener;
+};

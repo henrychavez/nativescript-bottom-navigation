@@ -1,23 +1,39 @@
 import { BottomNavigationBar } from '../bottom-navigation-bar';
 
-// Classes shortcuts
-const { BottomNavigationView } = com.google.android.material.bottomnavigation;
+// Types shortcuts
+declare type OnNavigationItemReselectedListener = com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener;
 
-// Interface shortcuts
-declare type OnNavigationItemReselectedListenerType = com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener;
-
-@Interfaces([BottomNavigationView.OnNavigationItemReselectedListener])
-export class OnTabReselectedListener extends java.lang.Object
-  implements OnNavigationItemReselectedListenerType {
-  private _owner: BottomNavigationBar;
-
-  static initWithOwner(owner: WeakRef<BottomNavigationBar>) {
-    const listener = new OnTabReselectedListener();
-    listener._owner = owner.get();
-    return listener;
-  }
-
-  public onNavigationItemReselected(item: globalAndroid.view.MenuItem): void {
-    this._owner._emitTabReselected(item.getItemId());
-  }
+interface OnTabReselectedListener {
+  new (owner: BottomNavigationBar): OnNavigationItemReselectedListener;
 }
+
+let OnTabReselectedListener: OnTabReselectedListener;
+
+export const getOnTabReselectedListener = () => {
+  if (OnTabReselectedListener) {
+    return OnTabReselectedListener;
+  }
+  @Interfaces([
+    com.google.android.material.bottomnavigation.BottomNavigationView
+      .OnNavigationItemReselectedListener,
+  ])
+  class OnTabReselectedListenerImpl extends java.lang.Object
+    implements OnNavigationItemReselectedListener {
+    constructor(public owner: BottomNavigationBar) {
+      super();
+
+      // necessary when extending TypeScript constructors
+      return global.__native(this);
+    }
+
+    public onNavigationItemReselected(
+      menuItem: globalAndroid.view.MenuItem,
+    ): void {
+      this.owner._emitTabReselected(menuItem.getItemId());
+    }
+  }
+
+  OnTabReselectedListener = OnTabReselectedListenerImpl;
+
+  return OnTabReselectedListener;
+};

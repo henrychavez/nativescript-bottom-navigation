@@ -8,8 +8,8 @@ import {
   inactiveColorCssProperty,
 } from '../base/bottom-navigation-bar.base';
 
-import { OnTabReselectedListener } from './listeners/on-tab-reselected.listener';
-import { OnTabSelectedListener } from './listeners/on-tab-selected.listener';
+import { getOnTabReselectedListener } from './listeners/on-tab-reselected.listener';
+import { getOnTabSelectedlistener } from './listeners/on-tab-selected.listener';
 import { BottomNavigationTab } from './bottom-navigation-tab';
 import { TitleVisibility } from '../internal/internals';
 import { createColorStateList } from './utils';
@@ -25,23 +25,23 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
     return this.nativeView;
   }
 
-  public createNativeView() {
+  createNativeView() {
     const nativeView = new BottomNavigationView(this._context);
 
-    const owner = new WeakRef(this);
-
-    nativeView.setOnNavigationItemSelectedListener(
-      OnTabSelectedListener.initWithOwner(owner),
-    );
-
+    const OnTabReselectedListener = getOnTabReselectedListener();
     nativeView.setOnNavigationItemReselectedListener(
-      OnTabReselectedListener.initWithOwner(owner),
+      new OnTabReselectedListener(this),
+    );
+    const OnTabSelectedListener = getOnTabSelectedlistener();
+    nativeView.setOnNavigationItemSelectedListener(
+      new OnTabSelectedListener(this),
     );
 
     return nativeView;
   }
 
   initNativeView(): void {
+    super.initNativeView();
     // Create the tabs before setting the default values for each tab
     this.createTabs();
     // Set default LabelVisibilityMode
