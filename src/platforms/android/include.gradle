@@ -1,4 +1,5 @@
-dependencies {
-    def materialVersion =  project.hasProperty("materialVersion") ? project.materialVersion : "1.1.0-alpha07"
-    implementation "com.google.android.material:material:$materialVersion"
+buildscript {
+    ext {
+        androidXMaterial = "1.1.0-alpha07"
+    }
 }
