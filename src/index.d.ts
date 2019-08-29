@@ -46,10 +46,13 @@ export declare class BottomNavigationBar extends BottomNavigationBarBase {
     callback: (data: EventData) => void,
     thisArg?: any,
   ): void;
+  protected createTabs(tabs?: BottomNavigationTab[]): void;
+  protected selectTabNative(index: number): void;
 }
 
 export declare class BottomNavigationTab extends BottomNavigationTabBase {
   title: string;
   icon: string;
   isSelectable: boolean;
+  getNativeIcon(): any;
 }
