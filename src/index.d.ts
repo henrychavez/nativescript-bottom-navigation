@@ -1,5 +1,6 @@
 import { BottomNavigationBarBase } from './lib/base/bottom-navigation-bar.base';
 import { BottomNavigationTabBase } from './lib/base/bottom-navigation-tab.base';
+import { EventData, Color } from 'tns-core-modules/ui/core/view';
 import {
   TabSelectedEventData,
   TabPressedEventData,
@@ -18,8 +19,8 @@ export declare class BottomNavigationBar extends BottomNavigationBarBase {
   readonly items: BottomNavigationTab[];
   selectedTabIndex: number;
   titleVisibility: TitleVisibility;
-  activeColor: string;
-  inactiveColor: string;
+  activeColor: Color;
+  inactiveColor: Color;
   backgroundColor: Color;
   selectTab(index: number): void;
   showBadge(index: number, value?: number): void;
