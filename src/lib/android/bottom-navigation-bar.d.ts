@@ -7,7 +7,7 @@ export declare class BottomNavigationBar extends BottomNavigationBarBase {
     initNativeView(): void;
     showBadge(index: number, value?: number): void;
     removeBadge(index: number): void;
-    protected createTabs(tabs?: BottomNavigationTab[]): void;
+    protected createTabs(tabs: BottomNavigationTab[] | undefined): void;
     protected selectTabNative(index: number): void;
     private setActiveColor;
     private setInactiveColor;

@@ -6,7 +6,6 @@ import {
   Property,
   CssProperty,
   Style,
-  AddArrayFromBuilder,
 } from 'tns-core-modules/ui/core/view';
 
 import {
@@ -109,7 +108,9 @@ export abstract class BottomNavigationBarBase extends View
   abstract showBadge(index: number, value?: number): void;
   abstract removeBadge(index: number): void;
   protected abstract selectTabNative(index: number): void;
-  protected abstract createTabs(tabs: BottomNavigationTabBase[]): void;
+  protected abstract createTabs(
+    tabs: BottomNavigationTabBase[] | undefined,
+  ): void;
 }
 
 export const tabsProperty = new Property<
@@ -118,7 +119,6 @@ export const tabsProperty = new Property<
 >({
   name: 'tabs',
   affectsLayout: true,
-  defaultValue: [],
 });
 
 tabsProperty.register(BottomNavigationBarBase);

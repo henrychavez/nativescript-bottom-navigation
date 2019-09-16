@@ -37,7 +37,8 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
 
   initNativeView(): void {
     // Create the tabs before setting the default values for each tab
-    this.createTabs();
+    // We call this method here to create the tabs defined in the xml
+    this.createTabs(this._items);
     // Set default LabelVisibilityMode
     this.nativeView.titleVisibility = this.titleVisibility as any;
     // Set default ActiveColor
@@ -111,7 +112,6 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
   [titleVisibilityProperty.setNative](
     titleVisibility: MDCBottomNavigationBarTitleVisibility,
   ) {
-    console.log('serrting adasdasdas');
     this.nativeView.titleVisibility = titleVisibility;
   }
 
@@ -127,10 +127,11 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
     this.nativeView.barTintColor = backgroundColor.ios;
   }
 
-  protected createTabs(tabs?: BottomNavigationTab[]) {
-    if (!this._items) {
+  protected createTabs(tabs: BottomNavigationTab[] | undefined) {
+    if (tabs) {
       this._items = tabs;
     }
+
     const bottomNavigationTabs = this._items.map((tab, index) =>
       UITabBarItem.alloc().initWithTitleImageTag(
         tab.title,
@@ -138,12 +139,16 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
         index,
       ),
     );
-
     this.nativeView.items = new NSArray({ array: bottomNavigationTabs });
-    this.nativeView.selectedItem = bottomNavigationTabs[this.selectedTabIndex];
+
+    this.selectTabNative(this.selectedTabIndex);
   }
 
   protected selectTabNative(index: number): void {
+    if (this.nativeView.items.count === 0) {
+      return;
+    }
+
     this.nativeView.selectedItem = this.nativeView.items[index];
     this.selectedTabIndex = index;
   }

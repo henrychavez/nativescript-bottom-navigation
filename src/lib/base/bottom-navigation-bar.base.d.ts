@@ -20,7 +20,7 @@ export declare abstract class BottomNavigationBarBase extends View implements Ad
     abstract showBadge(index: number, value?: number): void;
     abstract removeBadge(index: number): void;
     protected abstract selectTabNative(index: number): void;
-    protected abstract createTabs(tabs: BottomNavigationTabBase[]): void;
+    protected abstract createTabs(tabs: BottomNavigationTabBase[] | undefined): void;
 }
 export declare const tabsProperty: Property<BottomNavigationBarBase, BottomNavigationTabBase[]>;
 export declare const titleVisibilityProperty: Property<BottomNavigationBarBase, TitleVisibility>;

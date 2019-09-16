@@ -43,7 +43,8 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
   initNativeView(): void {
     super.initNativeView();
     // Create the tabs before setting the default values for each tab
-    this.createTabs();
+    // We call this method here to create the tabs defined in the xml
+    this.createTabs(this._items);
     // Set default LabelVisibilityMode
     this.nativeView.setLabelVisibilityMode(this.titleVisibility);
     // Set default ActiveColor
@@ -79,7 +80,7 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
     this.setInactiveColor(inactiveColor);
   }
 
-  protected createTabs(tabs?: BottomNavigationTab[]) {
+  protected createTabs(tabs: BottomNavigationTab[] | undefined) {
     const bottomNavigationTabs = this.nativeView.getMenu();
 
     if (bottomNavigationTabs.size() > 0) {
@@ -102,6 +103,12 @@ export class BottomNavigationBar extends BottomNavigationBarBase {
   }
 
   protected selectTabNative(index: number): void {
+    const bottomNavigationTabs = this.nativeView.getMenu();
+
+    if (bottomNavigationTabs.size() === 0) {
+      return;
+    }
+
     this.nativeView.setSelectedItemId(index);
   }
 
