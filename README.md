@@ -53,6 +53,8 @@ tns plugin add nativescript-bottom-navigation@1.5.1
 
 Before start using the plugin you need to add the icons for android & iOS in your `App_Resources` directory.
 
+Also you need to change your parent theme from `Theme.AppCompat` to `Theme.MaterialComponents` inside your `App_Resources/Android/src/main/res/values/styles.xml` file.
+
 #### XML
 
 You can set the tabs using the `tabs` property
